@@ -3,17 +3,7 @@
 
     @include('livewire.dashboard.Categories.deleteCategory')
 
-    @if (count($errors) > 0)
-        <div class="alert alert-danger ">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>Sorry!</strong> invalid input.<br><br>
-            <ul style="list-style-type:none;">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
     {{-- create and update displaying area Livewire--}}
     @if($updateMode)
         <div class="d-flex justify-content-center">
@@ -26,7 +16,17 @@
             @include('livewire.dashboard.Categories.createCategory')
         </div>
     @endif
-
+    @if (count($errors) > 0)
+    <div class="alert alert-danger mt-2">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Sorry!</strong> invalid input.<br><br>
+        <ul style="list-style-type:none;">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     {{--  Technologies list   --}}
     <div class="row d-flex justify-content-center pt-4">
         <div class="col-md-4">
@@ -81,6 +81,8 @@
                     <td>NAME</td>
                     <td>IMAGE</td>
                     <td>DISPLAY ORDER</td>
+                    <td>CREATED AT</td>
+                    <td>UPDATED AT</td>
                     <td></td>
                 </tr>
 
@@ -91,6 +93,8 @@
                         <td>{{$row->name}}</td>
                         <td><img src="{{url('storage/categories_images/'.$row->category_img_link) }}" height="80px" width="80px"></img></td>
                         <td>{{$row->display_order}}</td>
+                        <td>{{$row->created_at}}</td>
+                        <td>{{$row->updated_at}}</td>
                         <td width="100">
                             {{-- category edit and destroy methods Livewire--}}
 

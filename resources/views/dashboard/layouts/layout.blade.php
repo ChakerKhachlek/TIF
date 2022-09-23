@@ -70,6 +70,12 @@
             </a>
           </li>
 
+          <li class="{{ Route::currentRouteName() == 'newsletter' ? 'active' : '' }}">
+            <a href="{{route('newsletter')}}">
+              <i class="tim-icons icon-single-copy-04"></i>
+              <p>Newsletter</p>
+            </a>
+          </li>
 
 
 

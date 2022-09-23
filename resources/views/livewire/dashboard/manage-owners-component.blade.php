@@ -3,17 +3,7 @@
 
         @include('livewire.dashboard.Owners.deleteOwner')
 
-        @if (count($errors) > 0)
-            <div class="alert alert-danger ">
-                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong>Sorry!</strong> invalid input.<br><br>
-                <ul style="list-style-type:none;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
         {{-- create and update displaying area Livewire--}}
         @if($updateMode)
             <div class="d-flex justify-content-center">
@@ -26,7 +16,17 @@
                 @include('livewire.dashboard.Owners.createOwner')
             </div>
         @endif
-
+        @if (count($errors) > 0)
+        <div class="alert alert-danger mt-2">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Sorry!</strong> invalid input.<br><br>
+            <ul style="list-style-type:none;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         {{--  Technologies list   --}}
         <div class="row d-flex justify-content-center py-3">
             <div class="col-md-4">
@@ -79,6 +79,8 @@
                         <td>EMAIL</td>
                         <td>PHONE</td>
                         <td>IMAGE</td>
+                        <td>CREATED AT</td>
+                        <td>UPDATED AT</td>
                         <td></td>
                     </tr>
 
@@ -90,7 +92,8 @@
                             <td>{{$row->email}}</td>
                             <td>{{$row->phone}}</td>
                             <td><img src="{{url('storage/owners_images/'.$row->owner_img_link) }}" height="80px" width="80px"></img></td>
-
+                            <td>{{$row->created_at}}</td>
+                            <td>{{$row->updated_at}}</td>
                             <td width="100">
                                 {{-- owner edit and destroy methods Livewire--}}
 

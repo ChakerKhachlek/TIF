@@ -32,11 +32,21 @@ class Tif extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class,'category_tif');
     }
 
     public function owner()
     {
         return $this->belongsTo(Owner::class,'owner_id','id');
+    }
+
+      // this is a recommended way to declare event handlers
+      public static function boot() {
+        parent::boot();
+
+        static::deleting(function($tif) { // before delete() method call this
+             $tif->categories()->detach();
+             // do the rest of the cleanup...
+        });
     }
 }

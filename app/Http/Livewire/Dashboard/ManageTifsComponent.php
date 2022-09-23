@@ -13,6 +13,8 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;
+
 class ManageTifsComponent extends Component
 {
     use WithFileUploads;
@@ -26,6 +28,10 @@ class ManageTifsComponent extends Component
 
     public $owners,$categories;
     public $selected_owner;
+
+    public $filter_owner;
+
+    public $selectedCategories=[];
      // Update create mode variables switchers
      public $createMode = true;
      public $updateMode = false;
@@ -38,9 +44,30 @@ class ManageTifsComponent extends Component
         $this->owners=Owner::all();
         $this->categories=Category::all();
     }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingFilterOwner()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $data=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')->orWhere('status', 'like', '%'.$this->search.'%')->paginate(10);
+
+        if (empty($this->filter_owner)) {
+            $data=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')->orWhere('status', 'like', '%'.$this->search.'%')->orWhere('realisation_date', 'like', '%'.$this->search.'%')->paginate(10);
+
+        }else{
+            $this->search=null;
+            $data=Owner::find($this->filter_owner)->tifs()->paginate(10);
+        }
+
+
+
         return view('livewire.dashboard.manage-tifs-component',['data'=>$data]);
     }
 
@@ -53,6 +80,7 @@ class ManageTifsComponent extends Component
 
          $this->title = null;
          $this->reference=null;
+         $this->selectedCategories=null;
          $this->description=null;
          $this->price=null;
          $this->status=null;
@@ -62,6 +90,8 @@ class ManageTifsComponent extends Component
          $this->selected_id=null;
          $this->selectedTif=null;
          $this->selected_owner=null;
+         $this->filter_owner=null;
+         $this->search=null;
 
      }
 
@@ -113,7 +143,7 @@ class ManageTifsComponent extends Component
      $this->tif_img->storeAs('/public/tifs_images', $filename);
 
 
-     Tif::create([
+     $tif=Tif::create([
          'title' => $this->title,
          'reference' => $this->reference,
          'description'=>$this->description,
@@ -128,6 +158,7 @@ class ManageTifsComponent extends Component
 
      ]);
 
+     $tif->categories()->sync($this->selectedCategories);
      $this->resetInput();
      $this->emit('tif-created','Tif created successfully !');
  }
@@ -150,6 +181,8 @@ class ManageTifsComponent extends Component
         $mytime = Carbon::now()->format('Y-m-d');
         $this->auction_start_date=$mytime;
      }
+
+     $this->selectedCategories=$record->categories()->get()->pluck('id')->toArray();
 
      $this->auction_duration=$record->auction_duration;
      $this->auction_top_biding_price=$record->auction_top_biding_price;
@@ -179,6 +212,7 @@ class ManageTifsComponent extends Component
                 'tif_img' => 'required|image|max:1024',
 
             ]);
+
 
             if($this->status=="On auction"){
                $this->validate([
@@ -214,6 +248,7 @@ class ManageTifsComponent extends Component
                 'owner_id'=>$this->selected_owner
 
                ]);
+               $record->categories()->sync($this->selectedCategories);
            }else{
             $this->validate([
                 'selected_owner'=>'required',
@@ -253,6 +288,7 @@ class ManageTifsComponent extends Component
                 'auction_top_biding_price'=>$this->auction_top_biding_price,
                 'owner_id'=>$this->selected_owner
                ]);
+               $record->categories()->sync($this->selectedCategories);
            }
 
 
@@ -270,10 +306,8 @@ class ManageTifsComponent extends Component
     // Destroy method
     public function deleteTif()
     {
-         // Update create mode variables switchers
-     $this->createMode = false;
-     $this->updateMode = false;
-     $this->resetInput();
+
+
         if ($this->selectedTif) {
             $record = Tif::find($this->selectedTif);
             $image_path =public_path()."/storage/tifs_images/".$record->tif_img_url ;  // Value is not URL but directory file path
@@ -281,10 +315,14 @@ class ManageTifsComponent extends Component
 
                 unlink($image_path);
             }
+
             $record->delete();
 
         }
-
+// Update create mode variables switchers
+$this->createMode = true;
+$this->updateMode = false;
+$this->resetInput();
         $this->emit('tif-deleted','Tif deleted successfully !');
     }
 

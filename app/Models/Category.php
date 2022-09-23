@@ -5,8 +5,8 @@ namespace App\Models;
 
 use App\Models\Tif;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
@@ -18,9 +18,9 @@ class Category extends Model
         'display_order'
     ];
 
-    public function tifs(): HasMany
+    public function tifs(): BelongsToMany
     {
-        return $this->hasMany(Tif::class,'category_id','id');
+        return $this->belongsToMany(Tif::class,'category_tif');
     }
 
 }

@@ -12,15 +12,15 @@
     </style>
   </head>
   <body style="align-content: center;">
-    <h1>Categories List</h1>
+    <h1>Newsletetr subsribers List</h1>
     <table >
 <thead>
 
             <th>ID</th>
-            <th>NAME</th>
-            <th>IMAGE</th>
-            <th>DISPLAY ORDER</th>
+            <th>EMAIL</th>
             <th>CREATED AT</th>
+
+
 
     </thead>
     <tbody>
@@ -29,10 +29,9 @@
             <tr style="text-align: center;
             vertical-align: middle;">
                 <td>{{$row->id}}</td>
-                <td>{{$row->name}}</td>
-                <td><img src="{{public_path('storage/categories_images/'.$row->category_img_link) }}" height="100px" width="100px"></img></td>
-                <td>{{$row->display_order}}</td>
+                <td>{{$row->email}}</td>
                 <td>{{$row->created_at}}</td>
+
             </tr>
         @endforeach
     </tbody>

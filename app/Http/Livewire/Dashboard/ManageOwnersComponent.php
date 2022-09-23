@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\Tif;
 use App\Models\Owner;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -152,10 +153,7 @@ class ManageOwnersComponent extends Component
     // Destroy method
     public function deleteOwner()
     {
-          // Update create mode variables switchers
-     $this->createMode = false;
-     $this->updateMode = false;
-     $this->resetInput();
+
         if ($this->selectedOwner) {
             $record = Owner::find($this->selectedOwner);
             $image_path =public_path()."/storage/owners_images/".$record->owner_img_link ;  // Value is not URL but directory file path
@@ -163,9 +161,16 @@ class ManageOwnersComponent extends Component
 
                 unlink($image_path);
             }
+            foreach($record->tifs()->get() as $tif){
+                $tif=Tif::find($tif->id);
+                $tif->delete();
+            }
+
             $record->delete();
 
         }
+        $this->createMode = true;
+        $this->updateMode = false;
         $this->resetInput();
         $this->emit('owner-deleted','Owner deleted successfully !');
     }

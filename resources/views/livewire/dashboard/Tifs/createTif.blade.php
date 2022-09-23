@@ -30,6 +30,20 @@
             <label for="reference">Reference (Requires 8 characters : Digits and UpperCases)</label>
             {{-- Name Model Livewire--}}
             <input wire:model.lazy="reference" type="text" id="reference" class="form-control input-sm" >
+            <div class="row d-flex justify-content-center">
+                <div wire:loading wire:target="generateReference">
+                    <div class="la-line-spin-clockwise-fade-rotating la-light la-md my-3">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
             <div class="btn btn-sm btn-primary" wire:click="generateReference()" > Generate</div>
          </div>
 
@@ -58,6 +72,21 @@
             {{-- Name Model Livewire--}}
             <textarea rows="3" wire:model.lazy="description" type="text" id="description" class="form-control input-sm" ></textarea>
         </div>
+
+
+    <h1 class="text-white">Categories</h1>
+    <div class="row my-3">
+        @foreach($categories as $category)
+        <div class="col-md-4">
+        <div class="form-group">
+            <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" wire:model.lazy="selectedCategories">
+            <label class="form-check-label" for="{{ $category->id }}">
+            {{ $category->name }}
+            </label>
+        </div>
+    </div>
+        @endforeach
+    </div>
 
         <div class="form-group">
             <label for="price">Price (Required)</label>
@@ -100,12 +129,6 @@
             <input wire:model="auction_top_biding_price" type="number" name="auction_top_biding_price" /> DT
          </div>
         @endif
-
-
-
-
-
-
 
                 {{-- store method Livewire--}}
                 <div class="row d-flex justify-content-center">

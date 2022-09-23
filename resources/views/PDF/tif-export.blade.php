@@ -24,8 +24,10 @@
     <th width="10%">OWNER</th>
     <th width="20%">IMAGE</th>
     <th width="5%">PRICE</th>
+    <th width="20%">Rea/Cre/Upd Dates</th>
+    <th>Categories</th>
     <th width="10%">STATUS</th>
-    <th width="10%">REALISAITON DATE</th>
+
 
 
 
@@ -41,8 +43,14 @@
                 <th width="10%">{{ $row->owner->name }}</th>
                 <td><img src="{{public_path('storage/tifs_images/'.$row->tif_img_url) }}" height="100px" width="100px"></img></td>
                 <td>{{$row->price}} DT</td>
+                <td>{{$row->realisation_date}}</br>{{$row->created_at}}</br>{{$row->updated_at}}</td>
+                <td>
+                    @foreach($row->categories()->get() as $category)
+                    {{ $category->name }},
+                    @endforeach
+                </td>
                 <td>{{$row->status}}</td>
-                <td>{{$row->realisation_date}}</td>
+
 
 
             </tr>

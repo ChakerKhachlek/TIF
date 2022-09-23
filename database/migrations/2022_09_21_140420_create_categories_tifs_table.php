@@ -17,6 +17,8 @@ class CreateCategoriesTifsTable extends Migration
             $table->id();
             $table->integer('category_id')->unsigned();
             $table->integer('tif_id')->unsigned();
+
+
         });
     }
 

@@ -146,10 +146,7 @@ class ManageCategoriesComponent extends Component
     // Destroy method
     public function deleteCategory()
     {
-          // Update create mode variables switchers
-     $this->createMode = false;
-     $this->updateMode = false;
-     $this->resetInput();
+
         if ($this->selectedCategory) {
             $record = Category::find($this->selectedCategory);
             $image_path =public_path()."/storage/categories_images/".$record->category_img_link ;  // Value is not URL but directory file path
@@ -157,10 +154,13 @@ class ManageCategoriesComponent extends Component
 
                 unlink($image_path);
             }
+            $record->tifs()->detach();
             $record->delete();
 
         }
-
+        $this->createMode = true;
+        $this->updateMode = false;
+        $this->resetInput();
         $this->emit('catergory-deleted','Category deleted successfully !');
     }
 

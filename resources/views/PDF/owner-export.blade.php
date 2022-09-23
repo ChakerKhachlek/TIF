@@ -21,7 +21,7 @@
             <th>EMAIL</th>
             <th>PHONE</th>
             <th>IMAGE</th>
-
+            <th>CREATED AT</th>
 
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
                 <td>{{$row->email}}</td>
                 <td>{{$row->phone}}</td>
                 <td><img src="{{public_path('storage/owners_images/'.$row->owner_img_link) }}" height="100px" width="100px"></img></td>
-
+                <td>{{$row->created_at}}</td>
             </tr>
         @endforeach
     </tbody>
