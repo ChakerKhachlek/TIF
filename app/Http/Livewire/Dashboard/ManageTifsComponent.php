@@ -47,9 +47,9 @@ class ManageTifsComponent extends Component
         $this->realisation_date=$mytime;
         $this->auction_end_date=$mytime;
 
-        $this->owners=Owner::all();
-        $this->categories=Category::all();
-        $this->styles=Style::all();
+        $this->owners=Owner::all()->sortBy('name');
+        $this->categories=Category::all()->sortBy('name');
+        $this->styles=Style::all()->sortBy('name');
 
     }
 

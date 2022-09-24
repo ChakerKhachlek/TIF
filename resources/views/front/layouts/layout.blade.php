@@ -39,14 +39,14 @@
                                 <div class="de-flex-col">
                                     <!-- logo begin -->
                                     <div id="logo">
-                                        <a href="#">
+                                        <a href="{{ route('home') }}">
                                             <img alt="" src="{{asset('/logo-header.png')}}"  />
                                         </a>
                                     </div>
                                     <!-- logo close -->
                                 </div>
                                 <div class="de-flex-col">
-                                    <input id="quick_search" class="xs-hide style-2" name="quick_search" placeholder="search item here..." type="text" />
+                                    <input id="quick_search" class="xs-hide style-2" name="quick_search" placeholder="search by reference, name ..." type="text" />
                                 </div>
                             </div>
                             <div class="de-flex-col header-col-mid">
@@ -65,12 +65,12 @@
 
                                     </li>
                                     <li>
-                                        <a href="#">Imaginners<span></span></a>
+                                        <a href="#">About us<span></span></a>
                                     </li>
 
                                 </ul>
                                 <div class="menu_side_area">
-                                    <a href="dark-wallet.html" class="btn-main"><i class="icon_wallet_alt"></i><span>Contact us</span></a>
+                                    <a href="#" class="btn-main"><i class="icon-chat"></i><span>Contact us</span></a>
                                     <span id="menu-btn"></span>
                                 </div>
                             </div>

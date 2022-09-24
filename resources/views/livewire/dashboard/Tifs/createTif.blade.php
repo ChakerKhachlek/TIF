@@ -88,7 +88,7 @@
     <h1 class="text-white">Categories</h1>
     <div class="row my-3">
         @foreach($categories as $category)
-        <div class="col-md-4">
+        <div class="col-md-3">
         <div class="form-group">
             <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" wire:model.lazy="selectedCategories">
             <label class="form-check-label" for="{{ $category->id }}">

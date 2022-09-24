@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tif;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,11 @@ class Owner extends Model
         'owner_img_link',
         'phone'
     ];
+
+    public function getSlugAttribute(): string
+    {
+        return Str::slug($this->name);
+    }
 
     public function tifs(): HasMany
     {
