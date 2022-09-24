@@ -25,7 +25,7 @@ class ManageTifsComponent extends Component
     protected $paginationTheme = 'bootstrap';
     public $search = '';
 
-    public $title,$reference,$views_initial_count,$description,$price,$status,$realisation_date,$auction_start_date,$auction_duration,$auction_top_biding_price;
+    public $title,$reference,$views_initial_count,$description,$price,$status,$realisation_date,$auction_end_date,$auction_end_date_time,$auction_top_biding_price;
     public $selected_id,$selectedTif;
     public $tif_img;
 
@@ -45,7 +45,7 @@ class ManageTifsComponent extends Component
     public function mount(){
         $mytime = Carbon::now()->format('Y-m-d');
         $this->realisation_date=$mytime;
-        $this->auction_start_date=$mytime;
+        $this->auction_end_date=$mytime;
 
         $this->owners=Owner::all();
         $this->categories=Category::all();
@@ -89,7 +89,7 @@ class ManageTifsComponent extends Component
      private function resetInput()
      {
         $mytime = Carbon::now()->format('Y-m-d');
-        $this->auction_start_date=$mytime;
+        $this->auction_end_date=$mytime;
         $this->realisation_date=$mytime;
 
          $this->title = null;
@@ -98,7 +98,7 @@ class ManageTifsComponent extends Component
          $this->description=null;
          $this->price=null;
          $this->status=null;
-         $this->auction_duration=null;
+         $this->auction_end_date_time=null;
          $this->auction_top_biding_price=null;
          $this->tif_img=null;
          $this->selected_id=null;
@@ -134,7 +134,7 @@ class ManageTifsComponent extends Component
      $this->validate([
          'selected_owner'=>'required',
          'selected_style'=>'required',
-         'title' => 'required',
+         'title' => 'required|unique:tifs',
          'reference' => 'required|unique:tifs|regex:/^[A-Z0-9]{8}$/',
          'price' => 'required|numeric|gt:0',
          'views_initial_count'=>'required|integer',
@@ -146,15 +146,15 @@ class ManageTifsComponent extends Component
 
      if($this->status=="On auction"){
         $this->validate([
-            'auction_start_date' => 'required',
-            'auction_duration' => 'required|integer',
+            'auction_end_date' => 'required',
+            'auction_end_date_time' => 'required|integer|min:0|max:24',
             'auction_top_biding_price' => 'required',
 
         ]);
      }else{
-        $this->auction_duration=null;
+        $this->auction_end_date_time=null;
         $this->auction_top_biding_price=null;
-        $this->auction_start_date=null;
+        $this->auction_end_date=null;
     }
 
 
@@ -169,8 +169,8 @@ class ManageTifsComponent extends Component
          'price'=>$this->price,
          'status'=>$this->status,
          'realisation_date'=>$this->realisation_date,
-         'auction_start_date'=>$this->auction_start_date,
-         'auction_duration'=>$this->auction_duration,
+         'auction_end_date'=>$this->auction_end_date,
+         'auction_end_date_time'=>$this->auction_end_date_time,
          'auction_top_biding_price'=>$this->auction_top_biding_price,
          'views'=>$this->views_initial_count,
          'tif_img_url' => $filename,
@@ -195,17 +195,17 @@ class ManageTifsComponent extends Component
      $this->price = $record->price;
      $this->status = $record->status;
 
-     $this->realisation_date=$record->realisation_date;
-     if($record->auction_start_date){
-        $this->auction_start_date=$record->auction_start_date;
+     $this->realisation_date=$record->realisation_date->format('Y-m-d');
+     if($record->auction_end_date){
+        $this->auction_end_date=$record->auction_end_date->format('Y-m-d');
      }else{
         $mytime = Carbon::now()->format('Y-m-d');
-        $this->auction_start_date=$mytime;
+        $this->auction_end_date=$mytime;
      }
 
      $this->selectedCategories=$record->categories()->get()->pluck('id')->toArray();
      $this->views_initial_count=$record->views;
-     $this->auction_duration=$record->auction_duration;
+     $this->auction_end_date_time=$record->auction_end_date_time;
      $this->auction_top_biding_price=$record->auction_top_biding_price;
      $this->tif_img=$record->tif_img_url;
      $this->selected_owner=$record->owner->id;
@@ -223,7 +223,10 @@ class ManageTifsComponent extends Component
             $this->validate([
                 'selected_owner'=>'required',
                 'selected_style'=>'required',
-                'title' => 'required',
+                'title'  => [
+                    'required',
+                    Rule::unique('tifs')->ignore($record->id),
+                 ] ,
                 'reference' =>[
                     'required',
                     'regex:/^[A-Z0-9]{8}$/',
@@ -241,15 +244,15 @@ class ManageTifsComponent extends Component
 
             if($this->status=="On auction"){
                $this->validate([
-                   'auction_start_date' => 'required',
-                   'auction_duration' => 'required|integer',
+                   'auction_end_date' => 'required',
+                   'auction_end_date_time' => 'required|integer|min:0|max:24',
                    'auction_top_biding_price' => 'required',
 
                ]);
             }else{
-                $this->auction_duration=null;
+                $this->auction_end_date_time=null;
                 $this->auction_top_biding_price=null;
-                $this->auction_start_date=null;
+                $this->auction_end_date=null;
             }
                $filename= date('YmdHi').$this->tif_img->getClientOriginalName();
                $this->tif_img->storeAs('/public/tifs_images', $filename);
@@ -267,8 +270,8 @@ class ManageTifsComponent extends Component
                 'status'=>$this->status,
                 'realisation_date'=>$this->realisation_date,
 
-                'auction_start_date'=>$this->auction_start_date,
-                'auction_duration'=>$this->auction_duration,
+                'auction_end_date'=>$this->auction_end_date,
+                'auction_end_date_time'=>$this->auction_end_date_time,
                 'auction_top_biding_price'=>$this->auction_top_biding_price,
                 'views'=>$this->views_initial_count,
                 'tif_img_url' => $filename,
@@ -281,7 +284,10 @@ class ManageTifsComponent extends Component
             $this->validate([
                 'selected_owner'=>'required',
                 'selected_style'=>'required',
-                'title' => 'required',
+                'title' => [
+                    'required',
+                    Rule::unique('tifs')->ignore($record->id),
+                 ] ,
                 'reference' => [
                     'required',
                     'regex:/^[A-Z0-9]{8}$/',
@@ -295,15 +301,15 @@ class ManageTifsComponent extends Component
 
             if($this->status=="On auction"){
                $this->validate([
-                   'auction_start_date' => 'required',
-                   'auction_duration' => 'required|integer',
+                   'auction_end_date' => 'required',
+                   'auction_end_date_time' => 'required|integer|min:0|max:24',
                    'auction_top_biding_price' => 'required',
 
                ]);
             }else{
-                $this->auction_duration=null;
+                $this->auction_end_date_time=null;
                 $this->auction_top_biding_price=null;
-                $this->auction_start_date=null;
+                $this->auction_end_date=null;
             }
 
                $record->update([
@@ -313,8 +319,8 @@ class ManageTifsComponent extends Component
                 'price'=>$this->price,
                 'status'=>$this->status,
                 'realisation_date'=>$this->realisation_date,
-                'auction_start_date'=>$this->auction_start_date,
-                'auction_duration'=>$this->auction_duration,
+                'auction_end_date'=>$this->auction_end_date,
+                'auction_end_date_time'=>$this->auction_end_date_time,
                 'auction_top_biding_price'=>$this->auction_top_biding_price,
                 'views'=>$this->views_initial_count,
                 'owner_id'=>$this->selected_owner,

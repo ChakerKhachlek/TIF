@@ -55,8 +55,8 @@ class ManageStylesComponent extends Component
     public function store()
     {
         $this->validate([
-            'name' => 'required',
-            'style_img' => 'required|image|max:1024',
+            'name' => 'required|unique:styles',
+            'style_img' => 'required|image|max:8192',
             'display_order'=>'required|numeric|unique:styles|gt:0',
         ]);
 
@@ -95,8 +95,11 @@ class ManageStylesComponent extends Component
             $record = Style::find($this->selected_id);
             if(!is_string($this->style_img)){
                 $this->validate([
-                    'name' => 'required',
-                    'style_img' => 'required|image|max:1024',
+                    'name'  => [
+                        'required',
+                        Rule::unique('styles')->ignore($record->id),
+                     ] ,
+                    'style_img' => 'required|image|max:8192',
                     'display_order'=>[
                         'required',
                         'numeric',
@@ -120,7 +123,10 @@ class ManageStylesComponent extends Component
                 ]);
             }else{
                 $this->validate([
-                    'name' => 'required',
+                    'name' => [
+                        'required',
+                        Rule::unique('styles')->ignore($record->id),
+                     ] ,
                     'display_order'=>[
                         'required',
                         'numeric',

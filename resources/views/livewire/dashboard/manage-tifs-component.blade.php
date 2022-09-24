@@ -128,8 +128,8 @@
                         <td>CATEGORIES</td>
                         <td>STATUS</td>
 
-                        <td>AUCTION START DATE</td>
-                        <td>AUCTION DURATION</td>
+                        <td>Auction End Date</td>
+                        <td>Auction End Date Time</td>
                         <td>AUCTION TOP BIDING PRICE</td>
 
 
@@ -158,8 +158,8 @@
                                 @endforeach
                             </td>
                             <td>{{$row->status}}</td>
-                            <td> @if($row->auction_start_date) {{$row->auction_start_date}} @else Empty @endif </td>
-                            <td> @if($row->auction_duration) {{$row->auction_duration}} Hours @else Empty @endif </td>
+                            <td> @if($row->auction_end_date) {{$row->auction_end_date}} @else Empty @endif </td>
+                            <td> @if($row->auction_end_date_time) {{$row->auction_end_date_time}} Hours @else Empty @endif </td>
                             <td> @if($row->auction_top_biding_price) {{$row->auction_top_biding_price}} DT @else Empty @endif </td>
 
 

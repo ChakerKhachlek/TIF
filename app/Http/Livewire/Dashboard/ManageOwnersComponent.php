@@ -56,7 +56,7 @@ class ManageOwnersComponent extends Component
         $this->validate([
             'name' => 'required|unique:owners',
             'phone' => 'required|unique:owners|regex:/^[0-9]{8}$/',
-            'owner_img' => 'required|image|max:1024',
+            'owner_img' => 'required|image|max:8192',
 
         ]);
 
@@ -98,13 +98,16 @@ class ManageOwnersComponent extends Component
             $record = Owner::find($this->selected_id);
             if(!is_string($this->owner_img)){
                 $this->validate([
-                    'name' => 'required|unique:owners',
+                    'name'  => [
+                        'required',
+                        Rule::unique('owners')->ignore($record->id),
+                     ] ,
                     'phone' => [
                         'required',
                         'regex:/[0-9]{8}/',
                         Rule::unique('owners')->ignore($record->id),
                     ],
-                    'owner_img' => 'required|image|max:1024',
+                    'owner_img' => 'required|image|max:8192',
 
 
                 ]);
@@ -125,7 +128,10 @@ class ManageOwnersComponent extends Component
                 ]);
             }else{
                 $this->validate([
-                    'name' => 'required',
+                    'name'  => [
+                        'required',
+                        Rule::unique('owners')->ignore($record->id),
+                     ] ,
                     'phone' => [
                         'required',
                         'regex:/[0-9]{8}/',

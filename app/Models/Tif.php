@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Tif extends Model
 {
     use HasFactory;
-
+    protected $dates = ['auction_end_date','realisation_date'];
     protected $fillable = [
         'title',
         'reference',
@@ -20,8 +20,8 @@ class Tif extends Model
         'tif_img_url',
         'status',
         'realisation_date',
-        'auction_start_date',
-        'auction_duration',
+        'auction_end_date',
+        'auction_end_date_time',
         'auction_top_biding_price',
         'views',
         'owner_id',

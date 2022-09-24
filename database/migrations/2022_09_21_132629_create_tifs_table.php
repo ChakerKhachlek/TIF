@@ -22,8 +22,8 @@ class CreateTifsTable extends Migration
             $table->text('tif_img_url')->nullable();
             $table->text('status')->nullable();
             $table->text('realisation_date')->nullable();
-            $table->text('auction_start_date')->nullable();
-            $table->text('auction_duration')->nullable();
+            $table->text('auction_end_date')->nullable();
+            $table->text('auction_end_date_time')->nullable();
             $table->text('auction_top_biding_price')->nullable();
 
             $table->bigInteger('views')->unsigned()->default(0)->index();

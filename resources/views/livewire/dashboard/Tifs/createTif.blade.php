@@ -34,7 +34,7 @@
         <div class="form-group">
             <label for="name">Title (Required)</label>
             {{-- Name Model Livewire--}}
-            <input wire:model.lazy="title" type="text" id="title" class="form-control input-sm" >
+            <input wire:model.lazy="title" type="text" id="title" class="form-control input-sm" maxlength="24">
          </div>
 
         <div class="form-group">
@@ -131,15 +131,15 @@
 
         @if ($this->status=="On auction")
         <div class="form-group">
-            <label for="auction_start_date">Auction start date </label>
-            <input wire:model="auction_start_date" type="date" name="auction_start_date" />
+            <label for="auction_end_date">Auction End Date </label>
+            <input wire:model="auction_end_date" type="date" name="auction_end_date" />
             <i class="far fa-calendar-alt"></i>
          </div>
 
          <div class="form-group">
-            <label for="auction_duration">Auction Duration </label>
-            <input wire:model="auction_duration" type="number" name="auction_duration" min="1" step="1"/>
-            <i class="far fa-clock"></i> Hours
+            <label for="auction_end_date_time">Auction End Date Time </label>
+            <input wire:model="auction_end_date_time" type="number" name="auction_end_date_time" min="0" max="24" step="1"/>
+            <i class="far fa-clock"></i> 0-24 Hours
          </div>
          <div class="form-group">
             <label for="auction_top_biding_price">Auction Top Biding Price </label>

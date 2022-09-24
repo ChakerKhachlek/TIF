@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Tif;
+use App\Models\Owner;
 use App\Models\Style;
 use Illuminate\Http\Request;
 
@@ -29,10 +32,25 @@ class HomeController extends Controller
 
     public function home()
     {
-        $styles=Style::all();
+        $styles=Style::inRandomOrder()->limit(9)->orderBy('display_order')->get();
+        $categories=Category::inRandomOrder()->limit(8)->orderBy('display_order')->get();
+
+        $latest_tifs=Tif::limit(8)->latest()->get();
+
+
+        $top_owners=Owner::with(['tifs' => function ($query) {
+            $query;
+        }])
+            ->withCount('tifs')
+			->orderBy('tifs_count', 'desc')
+            ->get();
+
 
         return view('welcome',[
-            'styles'=>$styles
+            'styles'=>$styles,
+            'latest_tifs'=>$latest_tifs,
+            'top_owners'=>$top_owners,
+            'categories'=>$categories
         ]);
     }
 }

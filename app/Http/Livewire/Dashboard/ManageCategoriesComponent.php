@@ -54,8 +54,8 @@ class ManageCategoriesComponent extends Component
     public function store()
     {
         $this->validate([
-            'name' => 'required',
-            'category_img' => 'required|image|max:1024',
+            'name' => 'required|unique:categories',
+            'category_img' => 'required|image|max:8192',
             'display_order'=>'required|numeric|unique:categories|gt:0',
         ]);
 
@@ -94,8 +94,11 @@ class ManageCategoriesComponent extends Component
             $record = Category::find($this->selected_id);
             if(!is_string($this->category_img)){
                 $this->validate([
-                    'name' => 'required',
-                    'category_img' => 'required|image|max:1024',
+                    'name'  => [
+                        'required',
+                        Rule::unique('categories')->ignore($record->id),
+                     ] ,
+                    'category_img' => 'required|image|max:2048',
                     'display_order'=>[
                         'required',
                         'numeric',
@@ -119,7 +122,10 @@ class ManageCategoriesComponent extends Component
                 ]);
             }else{
                 $this->validate([
-                    'name' => 'required',
+                    'name'  => [
+                        'required',
+                        Rule::unique('categories')->ignore($record->id),
+                     ] ,
                     'display_order'=>[
                         'required',
                         'numeric',
