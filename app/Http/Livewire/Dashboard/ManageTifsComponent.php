@@ -8,11 +8,13 @@ use App\Models\Tif;
 use App\Models\Owner;
 use Livewire\Component;
 use App\Models\Category;
+use App\Exports\TifsExport;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Builder;
 
 class ManageTifsComponent extends Component
@@ -22,7 +24,7 @@ class ManageTifsComponent extends Component
     protected $paginationTheme = 'bootstrap';
     public $search = '';
 
-    public $title,$reference,$description,$price,$status,$realisation_date,$auction_start_date,$auction_duration,$auction_top_biding_price;
+    public $title,$reference,$views_initial_count,$description,$price,$status,$realisation_date,$auction_start_date,$auction_duration,$auction_top_biding_price;
     public $selected_id,$selectedTif;
     public $tif_img;
 
@@ -36,6 +38,8 @@ class ManageTifsComponent extends Component
      public $createMode = true;
      public $updateMode = false;
 
+     public $dataToExport;
+
     public function mount(){
         $mytime = Carbon::now()->format('Y-m-d');
         $this->realisation_date=$mytime;
@@ -43,6 +47,7 @@ class ManageTifsComponent extends Component
 
         $this->owners=Owner::all();
         $this->categories=Category::all();
+
     }
 
     public function updatingSearch()
@@ -55,15 +60,21 @@ class ManageTifsComponent extends Component
         $this->resetPage();
     }
 
+
     public function render()
     {
 
         if (empty($this->filter_owner)) {
-            $data=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')->orWhere('status', 'like', '%'.$this->search.'%')->orWhere('realisation_date', 'like', '%'.$this->search.'%')->paginate(10);
+            $this->dataToExport=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')->orWhere('status', 'like', '%'.$this->search.'%')->orWhere('realisation_date', 'like', '%'.$this->search.'%')->orderBy('created_at','DESC');
+            $data=$this->dataToExport->paginate(10);
+
+            $this->dataToExport=$this->dataToExport->get();
 
         }else{
             $this->search=null;
-            $data=Owner::find($this->filter_owner)->tifs()->paginate(10);
+            $this->dataToExport=Owner::find($this->filter_owner)->tifs()->orderBy('created_at','DESC');
+            $data=$this->dataToExport->paginate(10);
+            $this->dataToExport=$this->dataToExport->get();
         }
 
 
@@ -91,7 +102,9 @@ class ManageTifsComponent extends Component
          $this->selectedTif=null;
          $this->selected_owner=null;
          $this->filter_owner=null;
+         $this->views_initial_count=null;
          $this->search=null;
+         $this->views_initial_count=null;
 
      }
 
@@ -119,9 +132,10 @@ class ManageTifsComponent extends Component
          'title' => 'required',
          'reference' => 'required|unique:tifs|regex:/^[A-Z0-9]{8}$/',
          'price' => 'required|numeric|gt:0',
+         'views_initial_count'=>'required|integer',
          'status' => 'required',
          'realisation_date' => 'required',
-         'tif_img' => 'required|image|max:1024',
+         'tif_img' => 'required|image|max:10000',
 
      ]);
 
@@ -153,6 +167,7 @@ class ManageTifsComponent extends Component
          'auction_start_date'=>$this->auction_start_date,
          'auction_duration'=>$this->auction_duration,
          'auction_top_biding_price'=>$this->auction_top_biding_price,
+         'views'=>$this->views_initial_count,
          'tif_img_url' => $filename,
          'owner_id'=>$this->selected_owner
 
@@ -183,7 +198,7 @@ class ManageTifsComponent extends Component
      }
 
      $this->selectedCategories=$record->categories()->get()->pluck('id')->toArray();
-
+     $this->views_initial_count=$record->views;
      $this->auction_duration=$record->auction_duration;
      $this->auction_top_biding_price=$record->auction_top_biding_price;
      $this->tif_img=$record->tif_img_url;
@@ -208,8 +223,10 @@ class ManageTifsComponent extends Component
             ] ,
                 'price' => 'required|numeric|gt:0',
                 'status' => 'required',
+                'views_initial_count'=>'required|integer',
                 'realisation_date' => 'required',
-                'tif_img' => 'required|image|max:1024',
+
+                'tif_img' => 'required|image|max:10000',
 
             ]);
 
@@ -241,9 +258,11 @@ class ManageTifsComponent extends Component
                 'price'=>$this->price,
                 'status'=>$this->status,
                 'realisation_date'=>$this->realisation_date,
+
                 'auction_start_date'=>$this->auction_start_date,
                 'auction_duration'=>$this->auction_duration,
                 'auction_top_biding_price'=>$this->auction_top_biding_price,
+                'views'=>$this->views_initial_count,
                 'tif_img_url' => $filename,
                 'owner_id'=>$this->selected_owner
 
@@ -260,6 +279,7 @@ class ManageTifsComponent extends Component
                  ] ,
                 'price' => 'required|numeric|gt:0',
                 'status' => 'required',
+                'views_initial_count'=>'required|integer',
                 'realisation_date' => 'required',
             ]);
 
@@ -286,6 +306,7 @@ class ManageTifsComponent extends Component
                 'auction_start_date'=>$this->auction_start_date,
                 'auction_duration'=>$this->auction_duration,
                 'auction_top_biding_price'=>$this->auction_top_biding_price,
+                'views'=>$this->views_initial_count,
                 'owner_id'=>$this->selected_owner
                ]);
                $record->categories()->sync($this->selectedCategories);
@@ -328,13 +349,19 @@ $this->resetInput();
 
     public function export(){
 
-        $data=Tif::all()->sortBy('realisation_date');
+        $data=$this->dataToExport;
        $pdf = PDF::loadView('PDF.tif-export', compact('data'))->output();
 
 return response()->streamDownload(
     fn () => print($pdf),
     'tifs.pdf'
     );
+
+    }
+
+    public function exportExcel(){
+
+        return Excel::download(new TifsExport, 'tifs.xlsx');
 
     }
 

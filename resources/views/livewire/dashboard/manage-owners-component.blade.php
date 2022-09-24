@@ -32,9 +32,24 @@
             <div class="col-md-4">
                 <div class="h3 text-white">Owners List ({{$data->count()}})</div>
             </div>
-            <div class="col-md-2">
-                <div class="btn-sm btn-success" wire:click="export()">Export to PDF</div>
+            <div class="col-md-4">
+                <button class="btn-sm btn-success" wire:click="export()">Export all to PDF</button>
                 <div wire:loading wire:target="export" class="pt-2">
+                    <div class="la-line-spin-clockwise-fade-rotating la-light la-md ">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn-sm btn-success" wire:click="exportExcel()">Export all to Excel</button>
+                <div wire:loading wire:target="exportExcel" class="pt-2">
                     <div class="la-line-spin-clockwise-fade-rotating la-light la-md ">
                         <div></div>
                         <div></div>

@@ -57,7 +57,7 @@
                 <div class="h3 text-white">Tifs List ({{$data->count()}})</div>
             </div>
             <div class="col-md-2">
-                <div class="btn-sm btn-success" wire:click="export()">Export to PDF</div>
+                <button class="btn-sm btn-success" wire:click="export()">Export current data to PDF</button>
                 <div wire:loading wire:target="export" class="pt-2">
                     <div class="la-line-spin-clockwise-fade-rotating la-light la-md ">
                         <div></div>
@@ -72,11 +72,24 @@
                 </div>
             </div>
 
-
-
-
+            <div class="col-md-2">
+                <button class="btn-sm btn-success" wire:click="exportExcel()">Export all to Excel</button>
+                <div wire:loading wire:target="exportExcel" class="pt-2">
+                    <div class="la-line-spin-clockwise-fade-rotating la-light la-md ">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
 
         </div>
+        @if(empty($filter_owner))
         <div class="row d-flex justify-content-center pb-3">
             <div class="col-md-3">
                 <input wire:model.debounce.500ms="search" type="text" id="search" class="form-control input-sm" placeholder="Search by title,reference,status,realisation date" >
@@ -94,6 +107,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="row d-flex justify-content-center">
             <div class="col-md-12 table-responsive">
                 <table class="table table-bordered table-condensed ">
@@ -105,6 +119,7 @@
                         <td>IMAGE</td>
                         <td>DESCRIPTION</td>
                         <td>PRICE</td>
+                        <td>VIEWS</td>
                         <td>REALISAITON DATE</td>
 
                         <td>CREATED AT</td>
@@ -131,6 +146,7 @@
 
                             <td>{{$row->description}}</td>
                             <td>{{$row->price}} DT</td>
+                            <td>{{$row->views}}</td>
                             <td>{{$row->realisation_date}}</td>
                             <td>{{$row->created_at}}</td>
                             <td>{{$row->updated_at}}</td>

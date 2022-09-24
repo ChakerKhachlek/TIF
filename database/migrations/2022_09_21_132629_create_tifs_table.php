@@ -26,6 +26,8 @@ class CreateTifsTable extends Migration
             $table->text('auction_duration')->nullable();
             $table->text('auction_top_biding_price')->nullable();
 
+            $table->bigInteger('views')->unsigned()->default(0)->index();
+
             $table->integer('owner_id')->unsigned();
             $table->foreign('owner_id')->references('id')->on('owner');
             $table->timestamps();

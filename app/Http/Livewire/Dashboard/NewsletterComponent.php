@@ -7,6 +7,8 @@ use App\Models\Newsletter;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\NewsletterExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NewsletterComponent extends Component
 {
@@ -19,6 +21,12 @@ class NewsletterComponent extends Component
     {
         $data=Newsletter::paginate(10);
         return view('livewire.dashboard.newsletter-component',['data'=>$data]);
+    }
+
+    public function exportExcel(){
+
+        return Excel::download(new NewsletterExport, 'newsletter.xlsx');
+
     }
 
     public function export(){

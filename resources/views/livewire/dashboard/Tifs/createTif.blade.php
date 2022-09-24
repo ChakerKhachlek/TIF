@@ -94,6 +94,12 @@
             <input wire:model.lazy="price" type="number" id="price" class="form-control input-sm"  min="1" >
          </div>
 
+
+         <div class="form-group">
+            <label for="views_initial_count">Initial views count</label>
+            <input wire:model.lazy="views_initial_count" type="number" name="views_initial_count" min="1" step="1"/>
+            <i class="far fa-eye"></i>
+         </div>
          <div class="form-group">
             <label for="realisation_date">Realisation Date (Required)</label>
             <input wire:model.lazy="realisation_date" type="date" name="realisation_date" />

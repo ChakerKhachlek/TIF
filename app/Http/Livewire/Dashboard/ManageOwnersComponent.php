@@ -6,9 +6,11 @@ use App\Models\Tif;
 use App\Models\Owner;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Exports\OwnersExport;
 use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ManageOwnersComponent extends Component
 {
@@ -26,7 +28,7 @@ class ManageOwnersComponent extends Component
     public function render()
     {
 
-        $data=Owner::where('name', 'like', '%'.$this->search.'%')->orWhere('phone', 'like', '%'.$this->search.'%')->orWhere('email', 'like', '%'.$this->search.'%')->paginate(10);
+        $data=Owner::where('name', 'like', '%'.$this->search.'%')->orWhere('phone', 'like', '%'.$this->search.'%')->orWhere('email', 'like', '%'.$this->search.'%')->orderBy('id','DESC')->paginate(10);
 
         return view('livewire.dashboard.manage-owners-component',['data'=>$data]);
     }
@@ -184,6 +186,11 @@ return response()->streamDownload(
     fn () => print($pdf),
     'owners.pdf'
     );
+
+    }
+    public function exportExcel(){
+
+        return Excel::download(new OwnersExport, 'owners.xlsx');
 
     }
 }

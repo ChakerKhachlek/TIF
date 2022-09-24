@@ -22,6 +22,7 @@ class Tif extends Model
         'auction_start_date',
         'auction_duration',
         'auction_top_biding_price',
+        'views',
         'owner_id'
     ];
 
@@ -33,6 +34,11 @@ class Tif extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class,'category_tif');
+    }
+
+    public function incrementViewsCount() {
+        $this->views++;
+        return $this->save();
     }
 
     public function owner()

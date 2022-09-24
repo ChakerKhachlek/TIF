@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class ManageCategoriesComponent extends Component
@@ -173,6 +175,12 @@ return response()->streamDownload(
     fn () => print($pdf),
     'categories.pdf'
     );
+
+    }
+
+    public function exportExcel(){
+
+        return Excel::download(new CategoriesExport, 'categories.xlsx');
 
     }
 
