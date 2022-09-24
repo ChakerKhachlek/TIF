@@ -19,6 +19,17 @@
         <a href="{{route('owners-management')}}">New</a>
     </div>
 
+    <div class="form-group">
+        <select name="selected_style" wire:model.lazy="selected_style" class="border shadow p-2 bg-white">
+            <option value="">Choose the style</option>
+            {{-- selesting series Livewire--}}
+            @foreach($styles as $style)
+                <option value={{$style->id}}>{{ $style->name }}</option>
+            @endforeach
+        </select>
+        <a href="{{route('styles-management')}}">New</a>
+    </div>
+
 
         <div class="form-group">
             <label for="name">Title (Required)</label>

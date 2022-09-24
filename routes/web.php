@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -26,6 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/manage-categories', function () {
     return view('dashboard.pages.manage-categories'); })->name('categories-management');
+
+    Route::get('/manage-styles', function () {
+        return view('dashboard.pages.manage-styles'); })->name('styles-management');
 
 
 Route::get('/manage-owners', function () {

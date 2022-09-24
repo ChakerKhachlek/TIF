@@ -30,6 +30,8 @@ class CreateTifsTable extends Migration
 
             $table->integer('owner_id')->unsigned();
             $table->foreign('owner_id')->references('id')->on('owner');
+            $table->integer('style_id')->unsigned();
+            $table->foreign('style_id')->references('id')->on('style');
             $table->timestamps();
         });
     }

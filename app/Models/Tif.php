@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Style;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +24,8 @@ class Tif extends Model
         'auction_duration',
         'auction_top_biding_price',
         'views',
-        'owner_id'
+        'owner_id',
+        'style_id'
     ];
 
     public function getSlugAttribute(): string
@@ -36,6 +38,8 @@ class Tif extends Model
         return $this->belongsToMany(Category::class,'category_tif');
     }
 
+
+
     public function incrementViewsCount() {
         $this->views++;
         return $this->save();
@@ -44,6 +48,11 @@ class Tif extends Model
     public function owner()
     {
         return $this->belongsTo(Owner::class,'owner_id','id');
+    }
+
+    public function style()
+    {
+        return $this->belongsTo(Style::class,'style_id','id');
     }
 
       // this is a recommended way to declare event handlers

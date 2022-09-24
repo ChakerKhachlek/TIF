@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Dashboard;
 use Carbon\Carbon;
 use App\Models\Tif;
 use App\Models\Owner;
+use App\Models\Style;
 use Livewire\Component;
 use App\Models\Category;
 use App\Exports\TifsExport;
@@ -28,8 +29,9 @@ class ManageTifsComponent extends Component
     public $selected_id,$selectedTif;
     public $tif_img;
 
-    public $owners,$categories;
+    public $owners,$categories,$styles;
     public $selected_owner;
+    public $selected_style;
 
     public $filter_owner;
 
@@ -47,6 +49,7 @@ class ManageTifsComponent extends Component
 
         $this->owners=Owner::all();
         $this->categories=Category::all();
+        $this->styles=Style::all();
 
     }
 
@@ -101,6 +104,7 @@ class ManageTifsComponent extends Component
          $this->selected_id=null;
          $this->selectedTif=null;
          $this->selected_owner=null;
+         $this->selected_style=null;
          $this->filter_owner=null;
          $this->views_initial_count=null;
          $this->search=null;
@@ -129,6 +133,7 @@ class ManageTifsComponent extends Component
  {
      $this->validate([
          'selected_owner'=>'required',
+         'selected_style'=>'required',
          'title' => 'required',
          'reference' => 'required|unique:tifs|regex:/^[A-Z0-9]{8}$/',
          'price' => 'required|numeric|gt:0',
@@ -169,7 +174,8 @@ class ManageTifsComponent extends Component
          'auction_top_biding_price'=>$this->auction_top_biding_price,
          'views'=>$this->views_initial_count,
          'tif_img_url' => $filename,
-         'owner_id'=>$this->selected_owner
+         'owner_id'=>$this->selected_owner,
+         'style_id'=>$this->selected_style
 
      ]);
 
@@ -203,6 +209,7 @@ class ManageTifsComponent extends Component
      $this->auction_top_biding_price=$record->auction_top_biding_price;
      $this->tif_img=$record->tif_img_url;
      $this->selected_owner=$record->owner->id;
+     $this->selected_style=$record->style->id;
      $this->updateMode = true;
  }
 
@@ -215,6 +222,7 @@ class ManageTifsComponent extends Component
            if(!is_string($this->tif_img)){
             $this->validate([
                 'selected_owner'=>'required',
+                'selected_style'=>'required',
                 'title' => 'required',
                 'reference' =>[
                     'required',
@@ -264,13 +272,15 @@ class ManageTifsComponent extends Component
                 'auction_top_biding_price'=>$this->auction_top_biding_price,
                 'views'=>$this->views_initial_count,
                 'tif_img_url' => $filename,
-                'owner_id'=>$this->selected_owner
+                'owner_id'=>$this->selected_owner,
+                'style_id'=>$this->selected_style
 
                ]);
                $record->categories()->sync($this->selectedCategories);
            }else{
             $this->validate([
                 'selected_owner'=>'required',
+                'selected_style'=>'required',
                 'title' => 'required',
                 'reference' => [
                     'required',
@@ -307,7 +317,8 @@ class ManageTifsComponent extends Component
                 'auction_duration'=>$this->auction_duration,
                 'auction_top_biding_price'=>$this->auction_top_biding_price,
                 'views'=>$this->views_initial_count,
-                'owner_id'=>$this->selected_owner
+                'owner_id'=>$this->selected_owner,
+                'style_id'=>$this->selected_style
                ]);
                $record->categories()->sync($this->selectedCategories);
            }

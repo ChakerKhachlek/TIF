@@ -56,6 +56,13 @@
             </a>
           </li>
 
+          <li class="{{ Route::currentRouteName() == 'styles-management' ? 'active' : '' }}">
+            <a href="{{route('styles-management')}}">
+              <i class="tim-icons icon-palette"></i>
+              <p>Manage Styles</p>
+            </a>
+          </li>
+
           <li class="{{ Route::currentRouteName() == 'owners-management' ? 'active' : '' }}">
             <a href="{{route('owners-management')}}">
               <i class="tim-icons icon-badge"></i>

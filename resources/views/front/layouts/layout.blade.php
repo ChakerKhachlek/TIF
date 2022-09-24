@@ -53,7 +53,7 @@
                                 <!-- mainmenu begin -->
                                 <ul id="mainmenu">
                                     <li>
-                                        <a href="#">Home<span></span></a>
+                                        <a href="{{ route('home') }}">Home<span></span></a>
 
                                     </li>
                                     <li>

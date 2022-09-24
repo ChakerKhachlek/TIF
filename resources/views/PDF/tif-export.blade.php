@@ -8,7 +8,7 @@
 
   border: 1px solid black;
   border-collapse: collapse;
-  padding: 5px;
+  padding: 3px;
 }
 
     </style>
@@ -20,8 +20,9 @@
 
     <th width="5%">ID</th>
     <th  width="10%">TITLE</th>
-    <th width="10%">REFERENCE</th>
-    <th width="10%">OWNER</th>
+    <th width="5%">REFERENCE</th>
+    <th width="5%">OWNER</th>
+    <th width="5%">STYLE</th>
     <th width="20%">IMAGE</th>
     <th width="5%">PRICE</th>
     <th width="20%">Rea/Cre/Upd Dates</th>
@@ -39,8 +40,9 @@
             vertical-align: middle;">
                 <td>{{$row->id}}</td>
                 <td>{{$row->title}}</td>
-                <td>{{$row->reference}}</td>
-                <th width="10%">{{ $row->owner->name }}</th>
+                <td width="5%">{{$row->reference}}</td>
+                <th width="5%">{{ $row->owner->name }}</th>
+                <th width="5%">{{ $row->style->name }}</th>
                 <td><img src="{{public_path('storage/tifs_images/'.$row->tif_img_url) }}" height="100px" width="100px"></img></td>
                 <td>{{$row->price}} DT</td>
                 <td>{{$row->realisation_date}}</br>{{$row->created_at}}</br>{{$row->updated_at}}</td>
