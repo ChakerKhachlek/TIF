@@ -38,6 +38,11 @@ Route::get('/manage-owners', function () {
 Route::get('/manage-tifs', function () {
     return view('dashboard.pages.manage-tifs'); })->name('tifs-management');
 
+
+    Route::get('/manage-bids', function () {
+        return view('dashboard.pages.manage-bids'); })->name('bids-management');
+
+
     Route::get('/newsletter', function () {
         return view('dashboard.pages.newsletter'); })->name('newsletter');
 

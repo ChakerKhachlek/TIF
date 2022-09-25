@@ -67,6 +67,10 @@ class Tif extends Model
 
         static::deleting(function($tif) { // before delete() method call this
              $tif->categories()->detach();
+             foreach($tif->bids()->get() as $bid){
+                $bid=Bid::find($bid->id);
+                $bid->delete();
+            }
              // do the rest of the cleanup...
         });
     }

@@ -8,6 +8,8 @@
   border: 1px solid black;
   border-collapse: collapse;
   padding: 15px;
+  max-width: 80px;
+word-wrap: break-word;
 }
     </style>
   </head>

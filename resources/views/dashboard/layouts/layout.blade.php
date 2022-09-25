@@ -72,8 +72,15 @@
 
           <li class="{{ Route::currentRouteName() == 'tifs-management' ? 'active' : '' }}">
             <a href="{{route('tifs-management')}}">
-              <i class="tim-icons icon-money-coins"></i>
+              <i class="tim-icons icon-app"></i>
               <p>Manage Tifs </p>
+            </a>
+          </li>
+
+          <li class="{{ Route::currentRouteName() == 'bids-management' ? 'active' : '' }}">
+            <a href="{{route('bids-management')}}">
+              <i class="tim-icons icon-money-coins"></i>
+              <p>Manage Bids </p>
             </a>
           </li>
 

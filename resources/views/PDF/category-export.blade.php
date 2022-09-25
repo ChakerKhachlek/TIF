@@ -8,6 +8,8 @@
   border: 1px solid black;
   border-collapse: collapse;
   padding: 15px;
+  max-width: 80px;
+word-wrap: break-word;
 }
     </style>
   </head>
@@ -30,7 +32,7 @@
             vertical-align: middle;">
                 <td>{{$row->id}}</td>
                 <td>{{$row->name}}</td>
-                <td><img src="{{public_path('storage/categories_images/'.$row->category_img_link) }}" height="100px" width="100px"></img></td>
+                <td><img src="{{public_path('storage/categories_images/'.$row->category_img_link) }}" height="80px" width="80px"></img></td>
                 <td>{{$row->display_order}}</td>
                 <td>{{$row->created_at}}</td>
             </tr>

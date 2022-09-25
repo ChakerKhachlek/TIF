@@ -9,6 +9,8 @@
   border: 1px solid black;
   border-collapse: collapse;
   padding: 3px;
+  max-width: 80px;
+word-wrap: break-word;
 }
 
     </style>
@@ -43,7 +45,7 @@
                 <td width="5%">{{$row->reference}}</td>
                 <th width="5%">{{ $row->owner->name }}</th>
                 <th width="5%">{{ $row->style->name }}</th>
-                <td><img src="{{public_path('storage/tifs_images/'.$row->tif_img_url) }}" height="100px" width="100px"></img></td>
+                <td><img src="{{public_path('storage/tifs_images/'.$row->tif_img_url) }}" height="80px" width="80px"></img></td>
                 <td>{{$row->price}} DT</td>
                 <td>{{$row->realisation_date}}</br>{{$row->created_at}}</br>{{$row->updated_at}}</td>
                 <td>

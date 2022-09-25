@@ -59,7 +59,7 @@ class BuyFormComponent extends Component
     $this->resetInput();
 
     }catch(\Exception $e){
-        throw ValidationException::withMessages(['' => 'Error sending email, contact us through our facebook page.']);
+        throw ValidationException::withMessages(['' => 'Error sending demand, contact us through our facebook page.']);
     }
 
 
