@@ -20,7 +20,7 @@ class CreateOwnersTable extends Migration
             $table->string('phone')->nullable();
             $table->text('owner_img_link')->nullable();
 
-
+            $table->bigInteger('views')->unsigned()->default(0)->index();
             $table->timestamps();
         });
     }

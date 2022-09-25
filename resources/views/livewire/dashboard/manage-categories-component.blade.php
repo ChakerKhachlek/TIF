@@ -95,6 +95,7 @@
                     <td>NAME</td>
                     <td>IMAGE</td>
                     <td>DISPLAY ORDER</td>
+                    <td>VIEWS</td>
                     <td>CREATED AT</td>
                     <td>UPDATED AT</td>
                     <td></td>
@@ -107,6 +108,7 @@
                         <td>{{$row->name}}</td>
                         <td><img src="{{url('storage/categories_images/'.$row->category_img_link) }}" height="80px" width="80px"></img></td>
                         <td>{{$row->display_order}}</td>
+                        <td>{{$row->views}}</td>
                         <td>{{$row->created_at}}</td>
                         <td>{{$row->updated_at}}</td>
                         <td width="100">

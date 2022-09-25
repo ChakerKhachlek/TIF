@@ -15,12 +15,18 @@ class Category extends Model
     protected $fillable=[
         'name',
         'category_img_link',
-        'display_order'
+        'display_order',
+        'views'
+
     ];
 
     public function tifs(): BelongsToMany
     {
         return $this->belongsToMany(Tif::class,'category_tif');
+    }
+    public function incrementViewsCount() {
+        $this->views++;
+        return $this->save();
     }
 
 }

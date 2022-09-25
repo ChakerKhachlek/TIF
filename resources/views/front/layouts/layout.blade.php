@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-1">
                         <div class="widget">
-                            <h5>Resources</h5>
+                            <h5>Connect</h5>
                             <ul>
                                 <li><a href="#">Discord</a></li>
                                 <li><a href="#">About us</a></li>

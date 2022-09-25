@@ -70,6 +70,7 @@ class ManageStylesComponent extends Component
             'name' => $this->name,
             'style_img_link' => $filename,
             'display_order'=> $this->display_order,
+            'views'=>0
         ]);
 
         $this->resetInput();

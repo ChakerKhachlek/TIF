@@ -16,7 +16,8 @@ class Owner extends Model
         'name',
         'email',
         'owner_img_link',
-        'phone'
+        'phone',
+        'views'
     ];
 
     public function getSlugAttribute(): string
@@ -27,5 +28,10 @@ class Owner extends Model
     public function tifs(): HasMany
     {
         return $this->hasMany(Tif::class,'owner_id','id');
+    }
+
+    public function incrementViewsCount() {
+        $this->views++;
+        return $this->save();
     }
 }

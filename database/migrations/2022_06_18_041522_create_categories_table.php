@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->text('name')->nullable();
             $table->text('category_img_link')->nullable();
             $table->integer('display_order')->nullable();
+            $table->bigInteger('views')->unsigned()->default(0)->index();
             $table->timestamps();
         });
     }

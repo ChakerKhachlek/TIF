@@ -12,11 +12,16 @@ class Style extends Model
     protected $fillable=[
         'name',
         'style_img_link',
-        'display_order'
+        'display_order',
+        'views'
     ];
 
     public function tifs(): HasMany
     {
         return $this->hasMany(Tif::class,'style_id','id');
+    }
+    public function incrementViewsCount() {
+        $this->views++;
+        return $this->save();
     }
 }

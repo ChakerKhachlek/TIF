@@ -71,6 +71,7 @@ class ManageOwnersComponent extends Component
             'email' => $this->email,
             'phone'=>$this->phone,
             'owner_img_link' => $filename,
+            'views'=>0
 
         ]);
 

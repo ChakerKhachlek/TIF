@@ -18,6 +18,7 @@ class CreateStylesTable extends Migration
             $table->string('name')->nullable();
             $table->text('style_img_link')->nullable();
             $table->integer('display_order')->nullable();
+            $table->bigInteger('views')->unsigned()->default(0)->index();
             $table->timestamps();
         });
     }

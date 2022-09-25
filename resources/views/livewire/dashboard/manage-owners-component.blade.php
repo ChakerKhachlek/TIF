@@ -93,6 +93,7 @@
                         <td>NAME</td>
                         <td>EMAIL</td>
                         <td>PHONE</td>
+                        <td>VIEWS</td>
                         <td>IMAGE</td>
                         <td>CREATED AT</td>
                         <td>UPDATED AT</td>
@@ -106,6 +107,7 @@
                             <td>{{$row->name}}</td>
                             <td>{{$row->email}}</td>
                             <td>{{$row->phone}}</td>
+                            <td>{{$row->views}}</td>
                             <td><img src="{{url('storage/owners_images/'.$row->owner_img_link) }}" height="80px" width="80px"></img></td>
                             <td>{{$row->created_at}}</td>
                             <td>{{$row->updated_at}}</td>
