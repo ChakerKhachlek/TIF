@@ -25,12 +25,17 @@ class ManageCategoriesComponent extends Component
     // Update create mode variables switchers
     public $createMode = true;
     public $updateMode = false;
+    public $display_order_count;
 
-
+    public function mount(){
+        $this->display_order_count=Category::all()->count()+1;
+        $this->display_order=$this->display_order_count;
+    }
     public function render()
     {
 
         $data=Category::where('name', 'like', '%'.$this->search.'%')->orderBy('display_order')->paginate(10);
+
         return view('livewire.dashboard.manage-categories-component',['data'=>$data]);
     }
 
@@ -39,12 +44,14 @@ class ManageCategoriesComponent extends Component
     {
         $this->name = null;
         $this->category_img=null;
-        $this->display_order=null;
+        $this->display_order=$this->display_order_count;
+
     }
 
     // Creation mode on
     public function createMode()
     {
+
         $this->updateMode = false;
         $this->createMode = true;
         $this->resetInput();
@@ -71,7 +78,7 @@ class ManageCategoriesComponent extends Component
             'display_order'=> $this->display_order,
             'views'=>0
         ]);
-
+        $this->display_order_count++;
         $this->resetInput();
         $this->emit('catergory-created','Category created successfully !');
     }
@@ -169,6 +176,7 @@ class ManageCategoriesComponent extends Component
         }
         $this->createMode = true;
         $this->updateMode = false;
+        $this->display_order_count--;
         $this->resetInput();
         $this->emit('catergory-deleted','Category deleted successfully !');
     }

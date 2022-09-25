@@ -105,7 +105,7 @@ class ManageOwnersComponent extends Component
                      ] ,
                     'phone' => [
                         'required',
-                        'regex:/[0-9]{8}/',
+                        'regex:/^[0-9]{8}$/',
                         Rule::unique('owners')->ignore($record->id),
                     ],
                     'owner_img' => 'required|image|max:8192',
@@ -135,7 +135,7 @@ class ManageOwnersComponent extends Component
                      ] ,
                     'phone' => [
                         'required',
-                        'regex:/[0-9]{8}/',
+                        'regex:/^[0-9]{8}$/',
                         Rule::unique('owners')->ignore($record->id),
                     ],
 

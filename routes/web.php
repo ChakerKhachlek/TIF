@@ -17,6 +17,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/tif/{id}/{slug?}', [HomeController::class, 'show'])->name('tif.show');
 Route::get('/owner/{id}/{slug}', [HomeController::class, 'owner'])->name('owner.show');
+Route::get('/contact-us', function () {return view('front.pages.contact-us'); })->name('contact-us');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {

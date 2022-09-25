@@ -12,18 +12,19 @@
     <!-- CSS Files
     ================================================== -->
     <link id="bootstrap" href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link id="bootstrap-grid" href="{{ asset('css/bootstrap-grid.min.css') }}" rel="stylesheet" type="text/css" />
-    <link id="bootstrap-reboot" href="{{ asset('css/bootstrap-reboot.min.css') }}" rel="stylesheet" type="text/css" />
+    <link id="bootstrap-grid" href="{{ asset('front/css/bootstrap-grid.min.css') }}" rel="stylesheet" type="text/css" />
+    <link id="bootstrap-reboot" href="{{ asset('front/css/bootstrap-reboot.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/animate.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/owl.carousel.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/owl.theme.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/owl.transitions.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/magnific-popup.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('front//jquery.countdown.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('front/jquery.countdown.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- color scheme -->
     <link id="colors" href="{{ asset('front/css/colors/scheme-03.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/coloring.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('/black/plugins/loading.css') }}">
     @livewireStyles
 </head>
 
@@ -70,7 +71,7 @@
 
                                 </ul>
                                 <div class="menu_side_area">
-                                    <a href="#" class="btn-main"><i class="icon-chat"></i><span>Contact us</span></a>
+                                    <a href="{{ route('contact-us') }}" class="btn-main"><i class="icon-chat"></i><span>Contact us</span></a>
                                     <span id="menu-btn"></span>
                                 </div>
                             </div>
@@ -108,18 +109,9 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-1">
-                        <div class="widget">
-                            <h5>Newsletter</h5>
-                            <p>Signup for our newsletter to get the latest news in your inbox.</p>
-                            <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
-                                <div class="col text-center">
-                                    <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </form>
-                            <div class="spacer-10"></div>
-                            <small>Your email is safe with us. We don't spam.</small>
-                        </div>
+
+                           @livewire('front.newsletter-form-component')
+
                     </div>
                 </div>
             </div>
@@ -169,7 +161,9 @@
     <script src="{{ asset('front/js/jquery.lazy.min.js') }}"></script>
     <script src="{{ asset('front/js/jquery.lazy.plugins.min.js') }}"></script>
     <script src="{{ asset('front/js/designesia.js') }}"></script>
-
+  <!--Toastr -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     @livewireScripts
     @stack('scripts')
 

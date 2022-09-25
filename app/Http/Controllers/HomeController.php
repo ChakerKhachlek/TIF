@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Tif;
 use App\Models\Owner;
 use App\Models\Style;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -59,7 +60,18 @@ class HomeController extends Controller
     public function show($id){
         $tif=Tif::with('categories')->findOrFail($id);
         $tif->incrementViewsCount();
-        return view('front.pages.tif-details',['tif'=>$tif]);
+        $auction_closed=false;
+        if($tif->status=="On auction"){
+            $now=Carbon::now();
+            $bidding_end_date =  Carbon::createFromFormat('Y-m-d H', $tif->auction_end_date->format('Y-m-d').' '.$tif->auction_end_date_time);
+
+
+            if($now->gt($bidding_end_date)){
+                $auction_closed=true;
+            }
+
+        }
+        return view('front.pages.tif-details',['tif'=>$tif,'auction_closed'=>$auction_closed]);
     }
     public function owner($id){
         $owner=Owner::with('tifs')->findOrFail($id);

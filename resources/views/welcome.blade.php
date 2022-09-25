@@ -3,6 +3,7 @@
    <!-- content begin -->
    <div class="no-bottom no-top" id="content">
     <div id="top"></div>
+    @if($styles->count() >0)
     <section id="section-hero" class="no-bottom" aria-label="section">
         <div class="d-carousel">
             <div id="item-carousel-big" class="owl-carousel wow fadeIn">
@@ -26,7 +27,7 @@
                 <div class="d-arrow-right"><i class="fa fa-angle-right"></i></div>
         </div>
     </section>
-
+    @endif
     <section id="section-text" style="background-size: cover;">
         <div class="container" style="background-size: cover;">
             <div class="row" style="background-size: cover;">
@@ -70,6 +71,7 @@
             </div>
         </div>
     </section>
+    @if($biding_tifs->count() > 0)
     <section id="section-collections" class="pt30">
         <div class="container">
 
@@ -134,6 +136,8 @@
 
                 </div>
     </section>
+    @endif
+    @if($latest_tifs->count() > 0)
     <section id="section-collections" class="pt30">
         <div class="container">
 
@@ -228,6 +232,8 @@
 
                 </div>
     </section>
+    @endif
+    @if($top_owners->count()>0)
     <section id="section-popular" class="pb-5 no-top" style="background-size: cover;">
         <div class="container" style="background-size: cover;">
             <div class="row" style="background-size: cover;">
@@ -259,7 +265,7 @@
             </div>
         </div>
     </section>
-
+    @endif
 </div>
 <!-- content close -->
 

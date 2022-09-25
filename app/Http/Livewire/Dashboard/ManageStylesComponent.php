@@ -26,7 +26,12 @@ class ManageStylesComponent extends Component
     // Update create mode variables switchers
     public $createMode = true;
     public $updateMode = false;
+    public $display_order_count;
 
+    public function mount(){
+        $this->display_order_count=Style::all()->count()+1;
+        $this->display_order=$this->display_order_count;
+    }
 
     public function render()
     {
@@ -40,7 +45,7 @@ class ManageStylesComponent extends Component
     {
         $this->name = null;
         $this->style_img=null;
-        $this->display_order=null;
+        $this->display_order=$this->display_order_count;
     }
 
     // Creation mode on
@@ -72,7 +77,7 @@ class ManageStylesComponent extends Component
             'display_order'=> $this->display_order,
             'views'=>0
         ]);
-
+        $this->display_order_count++;
         $this->resetInput();
         $this->emit('style-created','Style created successfully !');
     }
@@ -173,6 +178,7 @@ class ManageStylesComponent extends Component
         }
         $this->createMode = true;
         $this->updateMode = false;
+        $this->display_order_count--;
         $this->resetInput();
         $this->emit('style-deleted','Style deleted successfully !');
     }

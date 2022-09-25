@@ -55,12 +55,25 @@
 
 
                     @if($tif->status=="On auction")
-                    <a class="btn-main" href="#">Place a bid <span> ( Current {{ $tif->auction_top_biding_price }} DT )</span></a>
+                    @if($auction_closed)
+                    <button class="btn-main" href="#"  disabled>Auction closed treating...</button>
+
+                    @else
+                    <button class="btn-main" href="#"  data-bs-toggle="modal" data-bs-target="#scrollableModal">Place a bid <span> ( Current {{ $tif->auction_top_biding_price }} DT )</span></button>
+
+                        @livewire('front.bid-form-component', ['tif' => $tif])
+
+                    @endif
+
+
+
+
                      @elseif($tif->status=="Buyed")
                      <a class="btn-main" href="#">Owned</a>
-                   @else
-                   <a class="btn-main" href="#">Buy now <span>{{ $tif->price }} DT</span></a>
 
+                   @else
+                   <a class="btn-main" href="#" data-bs-toggle="modal" data-bs-target="#scrollableModal">Buy now <span>{{ $tif->price }} DT</span></a>
+                        @livewire('front.buy-form-component', ['tif' => $tif])
                     @endif
 
                     <div class="spacer-40"></div>

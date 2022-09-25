@@ -6,6 +6,7 @@ use App\Models\Style;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tif extends Model
@@ -53,6 +54,11 @@ class Tif extends Model
     public function style()
     {
         return $this->belongsTo(Style::class,'style_id','id');
+    }
+
+    public function bids(): HasMany
+    {
+        return $this->hasMany(Bid::class,'tif_id','id');
     }
 
       // this is a recommended way to declare event handlers
