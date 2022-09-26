@@ -23,7 +23,6 @@
 
     </style>
   @livewireStyles
-  @stack('styles')
 </head>
 
 <body class="">
@@ -163,7 +162,7 @@
       </footer>
     </div>
   </div>
-  @stack('scripts')
+
   <!--   Core JS Files   -->
   <script src="{{asset('/black/js/core/jquery.min.js')}}"></script>
   <script src="{{asset('/black/js/core/popper.min.js')}}"></script>
@@ -172,11 +171,12 @@
   <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('/black/js/black-dashboard.min.js?v=1.0.0')}}"></script><!-- Black Dashboard DEMO methods, don't include it in your project! -->
 
+
    <!--Toastr -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
   @livewireScripts
-
+  @stack('scripts')
 
 </body>
 

@@ -19,6 +19,11 @@ class AdminController extends Controller
 
         $tifs=Tif::with('owner')->get();
         $categories=Category::all();
+        $categoriesTifsCounts=[];
+        foreach($categories as $category){
+            array_push($categoriesTifsCounts,($category->tifs()->count()));
+        }
+
         $styles=Style::all();
         $stylesTifsCounts=[];
         foreach($styles as $style){
@@ -35,10 +40,16 @@ class AdminController extends Controller
             return 'rgba(' . rand(0, 255) . ', ' . rand(0, 255) . ', ' . rand(0, 255) .', ' . rand(0, 255). ')';
         }
 
-        $randomColors=[];
+        $randomStylesColors=[];
         foreach($styles as $key=>$style){
-            array_push($randomColors,random_color());
+            array_push($randomStylesColors,random_color());
         }
+
+        $randomCategoriesColors=[];
+        foreach($categories as $key=>$style){
+            array_push($randomCategoriesColors,random_color());
+        }
+
 
 
 
@@ -66,6 +77,10 @@ class AdminController extends Controller
         ->where('owner.name', '!=', 'Imagination Factory');
 
 
+        $randomWeekColors=[];
+        foreach($week as $key=>$day){
+            array_push($randomWeekColors,random_color());
+        }
 
         $weekTifsSelledCount=[];
         foreach ($thisWeekDays as $date) {
@@ -94,10 +109,13 @@ class AdminController extends Controller
             'newslettersCount'=>$newsletters->count(),
 
             'stylesTifsCounts'=>$stylesTifsCounts,
-            'randomColors'=>$randomColors,
+            'randomStylesColors'=>$randomStylesColors,
             'thisWeekDays'=>$thisWeekDays,
             'weekTifsCount'=>$weekTifsCount,
-            'weekTifsSelledCount'=>$weekTifsSelledCount
+            'weekTifsSelledCount'=>$weekTifsSelledCount,
+            'randomWeekColors'=>$randomWeekColors,
+            'randomCategoriesColors'=>$randomCategoriesColors,
+            'categoriesTifsCounts'=>$categoriesTifsCounts
 
         ]
     );

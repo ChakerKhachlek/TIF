@@ -67,6 +67,18 @@
         </div>
 
         <div class="row my-3 justify-content-center">
+            <div class="col-3 text-white">
+            </div>
+            <div class="col-6" >
+
+                <canvas id="categoriesTifsDiagram" width="300" height="300"></canvas>
+            </div>
+            <div class="col-3 text-white">
+            </div>
+            </div>
+
+
+        <div class="row my-3 justify-content-center">
             <div class="col-6 text-white">
                 <canvas id="addedTifsWeekDiagram" width="300" height="300"></canvas>
 
@@ -115,7 +127,7 @@
           options:{
             title:{
               display:true,
-              text:'Tif\'s status ',
+              text:'Tif\'s statuses ',
               fontSize:20,
               fontColor:'white'
             },
@@ -142,7 +154,63 @@
           }
         }) ;
 
-        <!--Tifs Diagramme-->
+        <!--categories Diagramme-->
+        let ctxc = document.getElementById('categoriesTifsDiagram').getContext('2d');
+
+        let CategoriesTifsDiagram = new Chart(ctxc, {
+          type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+          data:{
+            labels:[
+                @foreach($categories as $category)
+                 '{{ $category->name }}',
+                @endforeach
+            ],
+            datasets:[{
+              label:'',
+              data:[
+                @foreach($categoriesTifsCounts as $categoriesTifsCount)
+                {{$categoriesTifsCount}},
+                @endforeach
+              ],
+              //backgroundColor:'green',
+              backgroundColor:[
+                @foreach($randomCategoriesColors as $key=>$Color)
+            '{{$Color}}' ,
+            @endforeach
+              ]
+            }]
+          },
+          options:{
+            title:{
+              display:true,
+              text:'Tif\'s per category ',
+              fontSize:20,
+              fontColor:'white'
+            },
+            legend:{
+              display:true,
+              position:'bottom',
+              labels:{
+                fontColor:'white'
+              }
+            },
+            layout:{
+              padding:{
+                left:0,
+                right:0,
+                bottom:0,
+                top:0
+              }
+            },
+            tooltips:{
+              enabled:true
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+          }
+        }) ;
+
+        <!--styles Diagramme-->
         let ctx2 = document.getElementById('stylesDiagramme').getContext('2d');
 
         let StylesDiagrammeChart = new Chart(ctx2, {
@@ -162,7 +230,7 @@
               ],
               //backgroundColor:'green',
               backgroundColor:[
-                @foreach($randomColors as $key=>$Color)
+                @foreach($randomStylesColors as $key=>$Color)
             '{{$Color}}' ,
             @endforeach
               ]
@@ -219,7 +287,7 @@
               ],
               //backgroundColor:'green',
               backgroundColor:[
-                @foreach($randomColors as $key=>$Color)
+                @foreach($randomWeekColors as $key=>$Color)
             '{{$Color}}' ,
             @endforeach
               ]
@@ -255,7 +323,7 @@
           }
         }) ;
 
-        <!--week added Diagramme-->
+        <!--week selled Diagramme-->
         let ctx4 = document.getElementById('selledTifsWeekDiagram').getContext('2d');
 
         let SelledTifsWeekDiagram = new Chart(ctx4, {
@@ -275,7 +343,7 @@
               ],
               //backgroundColor:'green',
               backgroundColor:[
-                @foreach($randomColors as $key=>$Color)
+                @foreach($randomWeekColors as $key=>$Color)
             '{{$Color}}' ,
             @endforeach
               ]
