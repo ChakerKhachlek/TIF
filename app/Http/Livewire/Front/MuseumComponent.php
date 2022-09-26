@@ -24,7 +24,7 @@ class MuseumComponent extends Component
     public $search;
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    public function mount($search){
+    public function mount(){
         $this->categories=Category::all();
         $this->statusfilter="All";
        
@@ -37,19 +37,29 @@ class MuseumComponent extends Component
 
 
     public function render()
-    {
-
+    {  
+        
         if($this->statusfilter=="All"){
-            $data=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')->orWhere('realisation_date', 'like', '%'.$this->search.'%')->orderBy('created_at','DESC')->paginate(12);
+            $data=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')
+            ->orWhereHas('categories', function ($query){
+                $query->where('name', 'like', '%'.$this->search.'%');
+            }) ->orWhereHas('owner', function ($query){
+                $query->where('name', 'like', '%'.$this->search.'%');
+            })->orderBy('created_at','DESC')->paginate(12);
         }
         else if($this->statusfilter=="Available"){
-
+          
             $data=Tif::where('status', '=', "Available")
-            ->where(function($query)
+            ->where(function($query) 
             { 
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
-                ->orWhere('realisation_date', 'like', '%'.$this->search.'%');
+                ->orWhereHas('owner', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                })
+                ->orWhereHas('categories', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                });
             })
                 ->orderBy('created_at','DESC')
                 ->paginate(12);
@@ -59,7 +69,12 @@ class MuseumComponent extends Component
             { 
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
-                ->orWhere('realisation_date', 'like', '%'.$this->search.'%');
+                ->orWhereHas('owner', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                })
+                ->orWhereHas('categories', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                });
             })
                 ->orderBy('created_at','DESC')
                 ->paginate(12);
@@ -69,7 +84,12 @@ class MuseumComponent extends Component
             { 
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
-                ->orWhere('realisation_date', 'like', '%'.$this->search.'%');
+                ->orWhereHas('owner', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                })
+                ->orWhereHas('categories', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                });
             })
                 ->orderBy('created_at','DESC')
                 ->paginate(12);  }

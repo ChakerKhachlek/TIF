@@ -16,7 +16,7 @@
         </div>
     </div>
 </section>
-@if($search)
+@if(!empty($search))
 @livewire('front.museum-component',['search'=>$search])
 @else
 @livewire('front.museum-component')
