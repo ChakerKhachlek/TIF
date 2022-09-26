@@ -61,7 +61,7 @@
 
                                     </li>
                                     <li>
-                                        <a href="{{ route('museum') }}">Museum<span></span></a>
+                                        <a href="{{ route('explore') }}">Explore<span></span></a>
 
                                     </li>
 
@@ -144,12 +144,12 @@
 
     </div>
 
- 
+
   <!--Toastr -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
-   
+
     @livewireScripts
     @stack('scripts')
    <!-- Javascript Files
@@ -165,7 +165,7 @@
     <script src="{{ asset('front/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('front/js/enquire.min.js') }}"></script>
     <script src="{{ asset('front/js/jquery.plugin.js') }}"></script>
-    
+
     <script src="{{ asset('front/js/jquery.lazy.min.js') }}"></script>
     <script src="{{ asset('front/js/jquery.lazy.plugins.min.js') }}"></script>
     <script src="{{ asset('front/js/designesia.js') }}"></script>

@@ -10,9 +10,19 @@
                             <h2>{{ $selectedCategory->name }} Category</h2>
                             <div class="small-border bg-color-2" style="background-size: cover;"></div>
                         </div>
-                    </div>
-                </div>
 
+                    </div>
+
+                </div>
+                <div class="row d-flex justify-content-center mb-4">
+                    <div class="col-md-4 text-center">
+                        <select wire:model="selectedId" class="form-select" aria-label="Default select example">
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                          </select>
+                </div>
+            </div>
                 <div class="row ">
                     @if($tifs->count() > 0)
                     @foreach($tifs as $tif)

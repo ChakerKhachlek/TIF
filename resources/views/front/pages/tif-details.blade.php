@@ -18,7 +18,7 @@
                         @endif
                         <h2>{{ $tif->title }}</h2>
                         <div class="item_info_counts">
-                            <div class="item_info_type"><i class="fa fa-image"></i>{{ $tif->style->name }}</div>
+                            <div class="item_info_type"><i class="fa fa-image"></i><a href="{{ route('styles.show',['id'=>$tif->style->id, $tif->style->name])}}">{{ $tif->style->name }} Style</a></div>
                             <div class="item_info_views"><i class="fa fa-eye"></i>{{ $tif->views }}</div>
 
                         </div>
@@ -46,7 +46,7 @@
 
                         <ul class="de_nav">
                             @foreach($tif->categories as $category)
-                            <li ><span><a href="#" class="text-white">{{ $category->name }} </a></span></li>
+                            <li ><span><a href="{{ route('categories.show',['id'=>$category->id, $category->name])}}">{{ $category->name }} </a></span></li>
                             @endforeach
                         </ul>
 

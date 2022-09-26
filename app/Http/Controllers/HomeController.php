@@ -80,7 +80,7 @@ class HomeController extends Controller
     }
 
     public function search(Request $request){
-        return view('front.pages.museum',['search'=>$request->search]);
+        return view('front.pages.explore',['search'=>$request->search]);
     }
 
     public function categories($id){

@@ -16,6 +16,7 @@ class StylesComponent extends Component
 
     public $selectedId;
     public $selectedStyle;
+    public $styles;
 
     public function updatingSelectedId(){
         $this->resetPage();
@@ -23,6 +24,8 @@ class StylesComponent extends Component
 
     public function mount($selected_id){
         $this->selectedId=$selected_id;
+        $this->styles=Style::all()->sortBy('name');
+
 
     }
     public function render()

@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label for="name">Name (Required)</label>
                 {{-- Name Model Livewire--}}
-                <input wire:model.lazy="name" type="text" id="name" class="form-control input-sm" >
+                <input wire:model.lazy="name" type="text" id="name" class="form-control input-sm" maxlength="24">
              </div>
 
             <div class="form-group">

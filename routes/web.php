@@ -17,7 +17,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/tif/{id}/{slug?}', [HomeController::class, 'show'])->name('tif.show');
 Route::get('/owner/{id}/{slug}', [HomeController::class, 'owner'])->name('owner.show');
-Route::get('/museum', function () {return view('front.pages.museum'); })->name('museum');
+Route::get('/explore', function () {return view('front.pages.explore'); })->name('explore');
 
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 

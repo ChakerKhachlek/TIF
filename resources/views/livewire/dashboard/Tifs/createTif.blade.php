@@ -9,7 +9,7 @@
     <div class="col col-md-12">
 
         <div class="form-group">
-        <select name="selected_owner" wire:model.lazy="selected_owner" class="border shadow p-2 bg-white">
+        <select name="selected_owner" wire:model.lazy="selected_owner" class="border shadow p-2 bg-white" >
             <option value="">Choose the owner</option>
             {{-- selesting series Livewire--}}
             @foreach($owners as $owner)

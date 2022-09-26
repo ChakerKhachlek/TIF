@@ -8,7 +8,7 @@ use App\Models\Category;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 
-class MuseumComponent extends Component
+class ExploreComponent extends Component
 {
 
    use WithPagination;
@@ -104,7 +104,7 @@ class MuseumComponent extends Component
                 ->paginate(12);  }
 
 
-        return view('livewire.front.museum-component',['data'=>$data]);
+        return view('livewire.front.explore-component',['data'=>$data]);
     }
 
 

@@ -12,7 +12,15 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row d-flex justify-content-center mb-4">
+                        <div class="col-md-4 text-center">
+                            <select wire:model="selectedId" class="form-select" aria-label="Default select example">
+                                @foreach($styles as $style)
+                                <option value="{{ $style->id }}">{{ $style->name }}</option>
+                                @endforeach
+                              </select>
+                    </div>
+                </div>
                     <div class="row ">
                         @if($tifs->count() > 0)
                         @foreach($tifs as $tif)
