@@ -77,4 +77,8 @@ class HomeController extends Controller
         $owner=Owner::with('tifs')->findOrFail($id);
         return view('front.pages.owner',['owner'=>$owner]);
     }
+
+    public function search(Request $request){
+        return view('front.pages.museum',['search'=>$request->search]);
+    }
 }

@@ -17,6 +17,11 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/tif/{id}/{slug?}', [HomeController::class, 'show'])->name('tif.show');
 Route::get('/owner/{id}/{slug}', [HomeController::class, 'owner'])->name('owner.show');
+Route::get('/museum', function () {return view('front.pages.museum'); })->name('museum');
+
+Route::post('/search', [HomeController::class, 'search'])->name('search');
+
+Route::get('/about-us', function () {return view('front.pages.about-us'); })->name('about-us');
 Route::get('/contact-us', function () {return view('front.pages.contact-us'); })->name('contact-us');
 
 Route::group(['middleware' => 'auth'], function () {

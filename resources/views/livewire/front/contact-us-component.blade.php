@@ -101,8 +101,8 @@
                         <address class="s1">
                             <span><i class="fa fa-facebook fa-lg"></i><a href="https://www.facebook.com/ImaginationFactoryTunisia">Facebook</a></span>
                             <span><i class="fa fa-map-marker fa-lg"></i>Carthage, Tunisia</span>
-                            <span><i class="fa fa-phone fa-lg"></i>+24 211 273</span>
-                            <span><i class="fa fa-envelope-o fa-lg"></i><a href="#">imagination.factory@gmail.com</a></span>
+                            <span><i class="fa fa-phone fa-lg"></i>+56 130 418</span>
+                            <span><i class="fa fa-envelope-o fa-lg"></i><button onclick="copy()" class="btn btn-sm btn-main">Copy</button></span>
 
                         </address>
                     </div>
@@ -113,6 +113,19 @@
             </div>
 
     </section>
+    @push('scripts')
+    <script>
 
+function copy() {
+
+
+  navigator.clipboard.writeText("imagination.factory.2022@gmail.com");
+
+
+  toastr.success("Copied the email");
+}
+
+    </script>
+    @endpush
 </div>
 

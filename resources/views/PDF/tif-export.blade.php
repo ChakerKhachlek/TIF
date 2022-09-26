@@ -31,9 +31,6 @@ word-wrap: break-word;
     <th>Categories</th>
     <th width="10%">STATUS</th>
 
-
-
-
     </thead>
     <tbody>
         {{-- $data represents categories Livewire--}}

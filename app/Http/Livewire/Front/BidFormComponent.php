@@ -39,7 +39,7 @@ class BidFormComponent extends Component
         'bid_price'=>'required|integer'
     ]);
 
-    if($this->bid_price < $this->tif->auction_top_biding_price){
+    if($this->bid_price <= $this->tif->auction_top_biding_price){
         throw ValidationException::withMessages(['bid_price' => 'The bid you place must be superior than the highest bidding price']);
     }
 
