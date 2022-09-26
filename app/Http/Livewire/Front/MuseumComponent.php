@@ -16,7 +16,7 @@ class MuseumComponent extends Component
 
    protected $paginationTheme = 'bootstrap';
 
-    public $statusfilter=["All","Available","On auctio","Buyed"];
+    public $statusfilter=["All","Available","On auction","Buyed"];
     public $categories;
     public $selectedCategoryId;
     public $selectedCategoryName="All";
@@ -27,18 +27,19 @@ class MuseumComponent extends Component
     public function mount(){
         $this->categories=Category::all();
         $this->statusfilter="All";
-       
+
     }
     public function updatingSearch()
     {
-   
+
         $this->resetPage();
     }
 
 
     public function render()
-    {  
-        
+    {
+        $this->search=trim($this->search);
+
         if($this->statusfilter=="All"){
             $data=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')
             ->orWhereHas('categories', function ($query){
@@ -50,10 +51,10 @@ class MuseumComponent extends Component
             })->orderBy('created_at','DESC')->paginate(12);
         }
         else if($this->statusfilter=="Available"){
-          
+
             $data=Tif::where('status', '=', "Available")
-            ->where(function($query) 
-            { 
+            ->where(function($query)
+            {
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
                 ->orWhereHas('owner', function ($query){
@@ -70,7 +71,7 @@ class MuseumComponent extends Component
         }else if($this->statusfilter=="On auction"){
 
             $data=Tif::where('status', '=', "On auction") ->where(function($query)
-            { 
+            {
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
                 ->orWhereHas('owner', function ($query){
@@ -87,7 +88,7 @@ class MuseumComponent extends Component
               }else if($this->statusfilter=="Buyed"){
 
             $data=Tif::where('status', '=', "Buyed") ->where(function($query)
-            { 
+            {
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
                 ->orWhereHas('owner', function ($query){
@@ -106,7 +107,7 @@ class MuseumComponent extends Component
         return view('livewire.front.museum-component',['data'=>$data]);
     }
 
- 
+
 
     public function filterCategory($id,$name){
         $this->resetPage();
@@ -117,7 +118,7 @@ class MuseumComponent extends Component
     public function filterAll(){
         $this->resetPage();
         $this->statusfilter="All";
-        
+
     }
 
     public function filterAvailable(){

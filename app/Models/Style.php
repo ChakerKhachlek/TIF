@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,5 +24,10 @@ class Style extends Model
     public function incrementViewsCount() {
         $this->views++;
         return $this->save();
+    }
+
+    public function getSlugAttribute(): string
+    {
+        return Str::slug($this->name);
     }
 }

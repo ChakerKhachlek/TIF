@@ -31,7 +31,7 @@
             <div id="item-carousel-big" class="owl-carousel wow fadeIn">
                 @foreach($styles as $style)
                 <div class="nft_pic">
-                    <a href="dark-item-details.html">
+                    <a href="{{ route('styles.show',['id'=>$style->id, $style->name])}}">
                         <span class="nft_pic_info">
                             <span class="nft_pic_title">{{ $style->name}}</span>
                             <span class="nft_pic_by">Style</span>
@@ -190,11 +190,11 @@
                 @foreach ($categories as $category)
                 <div class="nft_coll style-2">
                     <div class="nft_wrap">
-                        <a href="dark-collection.html"><img src="{{url('storage/categories_images/'.$category->category_img_link) }}" class="lazy img-fluid" alt=""></a>
+                        <a href="{{ route('categories.show',['id'=>$category->id, $category->name])}}"><img src="{{url('storage/categories_images/'.$category->category_img_link) }}" class="lazy img-fluid" alt=""></a>
                     </div>
 
                     <div class="nft_coll_info mt-3">
-                        <a href="dark-collection.html"><h4>{{ $category->name }}</h4></a>
+                        <a href="{{ route('categories.show',['id'=>$category->id, $category->name])}}"><h4>{{ $category->name }}</h4></a>
 
                     </div>
                 </div>

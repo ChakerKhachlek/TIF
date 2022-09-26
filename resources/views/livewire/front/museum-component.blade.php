@@ -22,19 +22,19 @@
                 <div class="container">
                     <div class="row  ">
                         <div class="col-md-12">
-                           
+
                             <div class="items_filter">
                                 <div  class="row form-dark" id="form_quick_search"  name="form_quick_search">
                                     <div class="col text-center">
                                         <input  wire:model.debounce.500ms="search" class="form-control" id="name_1" name="name_1" placeholder="reference, title, owner, style, category..." type="text" /> <a href="#" id="btn-submit" ><i class="fa fa-search " style="background-color:#F44336"></i></a>
-                                       
+
                                         <div class="clearfix"></div>
                                     </div>
-                                  
-                                </div>
-                               
 
-                                
+                                </div>
+
+
+
                                 <div id="items_type"  class="dropdown">
 
 
@@ -47,19 +47,19 @@
                                     </ul>
                                 </div>
 
-                                
+
 
 
 
                             </div>
                         </div>
-                       
 
-                          
 
-                     
+
+
+
                         @if($data->count() > 0)
-                        
+
                         @foreach($data as $tif)
                         <!-- nft item begin -->
                         <div class="col-md-3 col-sm-6 col-xs-12" wire:key="tif-{{ $tif->id }}">
@@ -118,19 +118,24 @@
 
 
                     @endforeach
-                    <row class="d-flex justify-content-center">
-                        {{ $data->links() }}
-                    </row>
-                    @else
-                        No results !
-                    @endif
+
                </div>
+               <div class="row d-flex  ">
+                <div class="col-lg-6 pagination justify-content-center">
+                    <div class=" " style="background-size: cover;">
+                        {{ $data->links() }}
+                    </div>
+                </div>
+            </div>
+            @else
+                No results !
+            @endif
                 </div>
             </section>
 
         </div>
 
         @push('scripts')
-      
+
         @endpush
     </div>

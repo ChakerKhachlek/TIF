@@ -21,6 +21,9 @@ Route::get('/museum', function () {return view('front.pages.museum'); })->name('
 
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 
+Route::get('/categories/show/{id}/{slug?}', [HomeController::class, 'categories'] )->name('categories.show');
+
+Route::get('/styles/show/{id}/{slug?}', [HomeController::class, 'styles'])->name('styles.show');
 
 Route::get('/about-us', function () {return view('front.pages.about-us'); })->name('about-us');
 Route::get('/contact-us', function () {return view('front.pages.contact-us'); })->name('contact-us');

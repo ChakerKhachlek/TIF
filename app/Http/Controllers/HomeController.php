@@ -75,10 +75,24 @@ class HomeController extends Controller
     }
     public function owner($id){
         $owner=Owner::with('tifs')->findOrFail($id);
+        $owner->incrementViewsCount();
         return view('front.pages.owner',['owner'=>$owner]);
     }
 
     public function search(Request $request){
         return view('front.pages.museum',['search'=>$request->search]);
     }
+
+    public function categories($id){
+        $category=Category::with('tifs')->findOrFail($id);
+        $category->incrementViewsCount();
+        return view('front.pages.categories',['selected_id'=>$id]);
+    }
+
+    public function styles($id){
+        $style=Style::with('tifs')->findOrFail($id);
+        $style->incrementViewsCount();
+        return view('front.pages.styles',['selected_id'=>$id]);
+    }
+
 }
