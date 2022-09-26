@@ -92,6 +92,30 @@ class AdminController extends Controller
 
         }
 
+        $weekBidsCount=[];
+        foreach ($thisWeekDays as $date) {
+            array_push($weekBidsCount,$bids->filter(function ($bid) use ($date) {
+
+                return $bid->created_at->isSameDay($date);
+
+            })->count());
+
+        }
+        $randomBidColors=[];
+        foreach($week as $key=>$day){
+            array_push($randomBidColors,random_color());
+        }
+
+        $weekConfirmedBidsCount=[];
+        foreach ($thisWeekDays as $date) {
+            array_push($weekConfirmedBidsCount,$bids->filter(function ($bid) use ($date) {
+
+                return $bid->created_at->isSameDay($date) and $bid->display==true;
+
+            })->count());
+
+        }
+
 
         return view('dashboard.pages.dashboard',
         [
@@ -115,7 +139,11 @@ class AdminController extends Controller
             'weekTifsSelledCount'=>$weekTifsSelledCount,
             'randomWeekColors'=>$randomWeekColors,
             'randomCategoriesColors'=>$randomCategoriesColors,
-            'categoriesTifsCounts'=>$categoriesTifsCounts
+            'categoriesTifsCounts'=>$categoriesTifsCounts,
+
+            'weekBidsCount'=>$weekBidsCount,
+            'weekConfirmedBidsCount'=>$weekConfirmedBidsCount,
+            'randomBidColors'=>$randomBidColors
 
         ]
     );

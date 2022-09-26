@@ -89,6 +89,17 @@
             </div>
             </div>
 
+            <div class="row my-3 justify-content-center">
+                <div class="col-3 text-white">
+                </div>
+                <div class="col-6" >
+
+                    <canvas id="bidsCount" width="300" height="300"></canvas>
+                </div>
+                <div class="col-3 text-white">
+                </div>
+                </div>
+
     </div>
 
     </div>
@@ -353,6 +364,80 @@
             title:{
               display:true,
               text:'Selled tifs this week',
+              fontSize:20,
+              fontColor:'white'
+            },
+            legend:{
+              display:true,
+              position:'bottom',
+              labels:{
+                fontColor:'white'
+              }
+            },
+            layout:{
+              padding:{
+                left:0,
+                right:0,
+                bottom:0,
+                top:0
+              }
+            },
+            tooltips:{
+              enabled:true
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+          }
+        }) ;
+
+
+        <!--bids selled Diagramme-->
+        let ctxb = document.getElementById('bidsCount').getContext('2d');
+
+        let BidsCount = new Chart(ctxb, {
+          type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+          data:{
+            labels:[  @foreach($thisWeekDays as $key=>$day)
+                    '{{$day->format("D")}}',
+                    @endforeach
+          ],
+            datasets:[{
+              label:'Total Created',
+              data:[
+                @foreach($weekBidsCount as $key=>$Occu)
+                    {{$Occu}},
+                    @endforeach
+
+              ],
+              //backgroundColor:'green',
+              backgroundColor:[
+                @foreach($randomBidColors as $key=>$Color)
+            '{{$Color}}' ,
+            @endforeach
+              ]
+            },
+            {
+              label:'Confirmed',
+              data:[
+                @foreach($weekConfirmedBidsCount as $key=>$Occu)
+                    {{$Occu}},
+                    @endforeach
+
+              ],
+              //backgroundColor:'green',
+              backgroundColor:[
+                @foreach($randomWeekColors as $key=>$Color)
+            '{{$Color}}' ,
+            @endforeach
+
+              ]
+            }
+        ]
+          },
+          options:{
+            title:{
+              display:true,
+              text:'Bids this week',
               fontSize:20,
               fontColor:'white'
             },
