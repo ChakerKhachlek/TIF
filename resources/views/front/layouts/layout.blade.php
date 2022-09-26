@@ -49,7 +49,7 @@
                                 <div class="de-flex-col">
                                     <form action="/search" method="POST" >
                                         @csrf
-                                    <input id="quick_search" class="xs-hide style-2" name="search" placeholder="search by reference, name ..." type="text" />
+                                    <input id="quick_search" class="xs-hide style-2" name="search" placeholder="search by ref, title, owner, style, category..." type="text" />
                                     </form>
                                 </div>
                             </div>

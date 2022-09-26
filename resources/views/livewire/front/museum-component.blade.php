@@ -26,7 +26,7 @@
                             <div class="items_filter">
                                 <div  class="row form-dark" id="form_quick_search"  name="form_quick_search">
                                     <div class="col text-center">
-                                        <input  wire:model.debounce.500ms="search" class="form-control" id="name_1" name="name_1" placeholder="reference,title,category,owner..." type="text" /> <a href="#" id="btn-submit" ><i class="fa fa-search " style="background-color:#F44336"></i></a>
+                                        <input  wire:model.debounce.500ms="search" class="form-control" id="name_1" name="name_1" placeholder="reference, title, owner, style, category..." type="text" /> <a href="#" id="btn-submit" ><i class="fa fa-search " style="background-color:#F44336"></i></a>
                                        
                                         <div class="clearfix"></div>
                                     </div>
