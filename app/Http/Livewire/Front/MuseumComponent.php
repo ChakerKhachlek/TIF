@@ -45,6 +45,8 @@ class MuseumComponent extends Component
                 $query->where('name', 'like', '%'.$this->search.'%');
             }) ->orWhereHas('owner', function ($query){
                 $query->where('name', 'like', '%'.$this->search.'%');
+            }) ->orWhereHas('style', function ($query){
+                $query->where('name', 'like', '%'.$this->search.'%');
             })->orderBy('created_at','DESC')->paginate(12);
         }
         else if($this->statusfilter=="Available"){
@@ -55,6 +57,8 @@ class MuseumComponent extends Component
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
                 ->orWhereHas('owner', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                }) ->orWhereHas('style', function ($query){
                     $query->where('name', 'like', '%'.$this->search.'%');
                 })
                 ->orWhereHas('categories', function ($query){
@@ -71,6 +75,8 @@ class MuseumComponent extends Component
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
                 ->orWhereHas('owner', function ($query){
                     $query->where('name', 'like', '%'.$this->search.'%');
+                }) ->orWhereHas('style', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
                 })
                 ->orWhereHas('categories', function ($query){
                     $query->where('name', 'like', '%'.$this->search.'%');
@@ -85,6 +91,8 @@ class MuseumComponent extends Component
                 $query->where('title', 'like', '%'.$this->search.'%')
                 ->orWhere('reference', 'like', '%'.$this->search.'%')
                 ->orWhereHas('owner', function ($query){
+                    $query->where('name', 'like', '%'.$this->search.'%');
+                }) ->orWhereHas('style', function ($query){
                     $query->where('name', 'like', '%'.$this->search.'%');
                 })
                 ->orWhereHas('categories', function ($query){
