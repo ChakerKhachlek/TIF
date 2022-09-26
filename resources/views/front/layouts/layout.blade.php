@@ -25,7 +25,7 @@
     <link id="colors" href="{{ asset('front/css/colors/scheme-03.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/coloring.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('/black/plugins/loading.css') }}">
-        @stack('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     @livewireStyles
 </head>
 
@@ -140,13 +140,9 @@
     </div>
 
 
-  <!--Toastr -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 
-    @livewireScripts
-    @stack('scripts')
+
    <!-- Javascript Files
     ================================================== -->
     <script src="{{ asset('front/js/jquery.min.js') }}"></script>
@@ -166,6 +162,13 @@
     <script src="{{ asset('front/js/designesia.js') }}"></script>
     <script src="{{ asset('front/js/jquery.countTo.js') }}"></script>
     <script src="{{ asset('front/js/jquery.countdown.js') }}"></script>
+
+
+   <!--Toastr -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+     @livewireScripts
+     @stack('scripts')
 </body>
 
 </html>

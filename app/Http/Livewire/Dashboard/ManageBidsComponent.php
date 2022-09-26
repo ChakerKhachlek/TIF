@@ -30,14 +30,18 @@ class ManageBidsComponent extends Component
     public $selected_id,$selectedBid;
 
 
-    public $filter_tif;
-    public $selected_tif;
+    public $filterTif;
+
     public $dataToExport;
 
     public $createMode = true;
     public $updateMode = false;
 
 
+    public function updatingFilterTif(){
+        $this->resetPage();
+
+    }
     public function mount(){
     $this->tifs=Tif::where('status','=','On auction')->get();
     }
@@ -52,13 +56,13 @@ class ManageBidsComponent extends Component
 
     public function render()
     {
-        if (empty($this->filter_tif)) {
+        if (empty($this->filterTif)) {
             $this->dataToExport=Bid::orderBy('bid_price','DESC');
             $data=$this->dataToExport->paginate(10);
             $this->dataToExport=$this->dataToExport->get();
 
         }else{
-            $this->dataToExport=Bid::where('tif_id','=',$this->filter_tif)->orderBy('bid_price','DESC');
+            $this->dataToExport=Bid::where('tif_id','=',$this->filterTif)->orderBy('bid_price','DESC');
             $data=$this->dataToExport->paginate(10);
             $this->dataToExport=$this->dataToExport->get();
         }
@@ -69,7 +73,7 @@ class ManageBidsComponent extends Component
     public function store(){
         $this->success=false;
         $now=Carbon::now();
-        $tif=Tif::find($this->filter_tif);
+        $tif=Tif::find($this->filterTif);
         $bidding_end_date =  Carbon::createFromFormat('Y-m-d H', $tif->auction_end_date->format('Y-m-d').' '.$tif->auction_end_date_time);
 
         $this->validate([
@@ -194,5 +198,23 @@ $bid->tif()->update([
 'auction_top_biding_price'=>$bid->bid_price
 ]);
 $this->emit('bid-confirmed','Bid confirmed successfully !');
+}
+
+public function clearBids(){
+    if($this->filterTif){
+        $record=Tif::find($this->filterTif);
+        foreach($record->bids()->get() as $bid){
+            $bid=Bid::find($bid->id);
+            $bid->delete();
+        }
+        // Update create mode variables switchers
+        $this->createMode = true;
+        $this->updateMode = false;
+        $this->resetInput();
+            $this->emit('bids-cleared','Bids cleared successfully !');
+    }else{
+        $this->emit('bids-clear-error','No tif selected !');
+    }
+
 }
 }

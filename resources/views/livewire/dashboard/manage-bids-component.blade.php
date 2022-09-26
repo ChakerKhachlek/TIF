@@ -27,14 +27,15 @@
             </ul>
         </div>
     @endif
+
         {{--  Technologies list   --}}
         <div class="row d-flex justify-content-center py-3">
             <div class="col-md-4" >
-                <select name="filter_tif" wire:model="filter_tif" class="border shadow p-2 bg-white">
+                <select name="filterTif" wire:model="filterTif" class="border shadow p-2 bg-white">
                    <option value="">Filter by tif</option>
                    {{-- selesting series Livewire--}}
                             @foreach($tifs as $tif)
-                              <option value="{{$tif->id}}">{{ $tif->title }}{{ $tif->reference }}</option>
+                              <option value="{{$tif->id}}">{{ $tif->title }} ({{ $tif->reference }})</option>
                             @endforeach
 
                </select>
@@ -51,9 +52,19 @@
                 </div>
             </div>
            </div>
-            <div class="col-md-4">
+           <div class="col-md-2">
+            @if(!empty($filterTif))
+            <button type="button" class="btn btn-danger btn-sm "
+                data-toggle="modal" data-target="#clearBidModal">
+                Clear Tif Bids
+            </button>
+            @endif
+
+        </div>
+            <div class="col-md-2">
                 <div class="h3 text-white">Bids List ({{$data->count()}})</div>
             </div>
+
             <div class="col-md-2">
                 <button class="btn-sm btn-success" wire:click="export()">Export current data to PDF</button>
                 <div wire:loading wire:target="export" class="pt-2">
@@ -84,6 +95,7 @@
                         <div></div>
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -160,6 +172,7 @@
                                 </button>
                             </td>
                         </tr>
+
                     @endforeach
                 </table>
             </div>
@@ -194,6 +207,18 @@
 
         toastr.warning(event);
     });
+    Livewire.on('bids-cleared', event => {
+        $("#clearBidModal").modal('hide');
+            $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+        toastr.success(event);
+    });
+
+    Livewire.on('bids-clear-error', event => {
+
+toastr.warning(event);
+});
+
     </script>
     @endpush
     </div>
