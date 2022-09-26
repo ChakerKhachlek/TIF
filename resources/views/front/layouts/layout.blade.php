@@ -90,19 +90,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-1">
-                        <div class="widget">
-                            <h5>Marketplace</h5>
-                            <ul>
-                                <li><a href="#">All Tifs</a></li>
-                                <li><a href="#">Owners Ranking</a></li>
-
-                            </ul>
-                        </div>
+                        <x-footer-links/>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-1">
                         <div class="widget">
                             <h5>Connect</h5>
                             <ul>
+                                <li><a href="https://www.facebook.com/ImaginationFactoryTunisia">Facebook</a></li>
                                 <li><a href="#">Discord</a></li>
                                 <li><a href="{{ route('about-us') }}">About us</a></li>
                             </ul>
