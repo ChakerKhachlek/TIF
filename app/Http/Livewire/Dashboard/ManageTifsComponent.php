@@ -33,7 +33,7 @@ class ManageTifsComponent extends Component
     public $selected_owner;
     public $selected_style;
 
-    public $filter_owner;
+    public $filterOwner;
 
     public $selectedCategories=[];
      // Update create mode variables switchers
@@ -67,7 +67,7 @@ class ManageTifsComponent extends Component
     public function render()
     {
 
-        if (empty($this->filter_owner)) {
+        if (empty($this->filterOwner)) {
             $this->dataToExport=Tif::where('title', 'like', '%'.$this->search.'%')->orWhere('reference', 'like', '%'.$this->search.'%')->orWhere('status', 'like', '%'.$this->search.'%')->orWhere('realisation_date', 'like', '%'.$this->search.'%')->orderBy('created_at','DESC');
             $data=$this->dataToExport->paginate(10);
 
@@ -75,7 +75,7 @@ class ManageTifsComponent extends Component
 
         }else{
             $this->search=null;
-            $this->dataToExport=Owner::find($this->filter_owner)->tifs()->orderBy('created_at','DESC');
+            $this->dataToExport=Owner::find($this->filterOwner)->tifs()->orderBy('created_at','DESC');
             $data=$this->dataToExport->paginate(10);
             $this->dataToExport=$this->dataToExport->get();
         }
@@ -105,7 +105,7 @@ class ManageTifsComponent extends Component
          $this->selectedTif=null;
          $this->selected_owner=null;
          $this->selected_style=null;
-         $this->filter_owner=null;
+         $this->filterOwner=null;
          $this->views_initial_count=null;
          $this->search=null;
          $this->views_initial_count=null;

@@ -30,7 +30,7 @@
         {{--  Technologies list   --}}
         <div class="row d-flex justify-content-center py-3">
             <div class="col-md-4" >
-                <select name="filter_owner" wire:model="filter_owner" class="border shadow p-2 bg-white">
+                <select name="filterOwner" wire:model="filterOwner" class="border shadow p-2 bg-white">
                    <option value="">Filter by owner</option>
                    {{-- selesting series Livewire--}}
                             @foreach($owners as $owner)
@@ -89,7 +89,7 @@
             </div>
 
         </div>
-        @if(empty($filter_owner))
+        @if(empty($filterOwner))
         <div class="row d-flex justify-content-center pb-3">
             <div class="col-md-3">
                 <input wire:model.debounce.500ms="search" type="text" id="search" class="form-control input-sm" placeholder="Search by title,reference,status,realisation date" >
@@ -133,7 +133,7 @@
                         <td>AUCTION TOP BIDING PRICE</td>
 
 
-                        <td></td>
+                        <td>Edit/Del</td>
                     </tr>
 
                     {{-- $data represents tifs Livewire--}}
@@ -165,7 +165,7 @@
 
                             <td width="100">
                                 {{-- tif edit and destroy methods Livewire--}}
-
+                                ID : {{$row->id}}</br>
                                 <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon" wire:click="edit({{$row->id}})" >
                                     <i class="tim-icons icon-settings"></i>
                                 </button>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +30,7 @@ Route::get('/about-us', function () {return view('front.pages.about-us'); })->na
 Route::get('/contact-us', function () {return view('front.pages.contact-us'); })->name('contact-us');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard.pages.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('dashboard');
 
 
 Route::get('/manage-categories', function () {

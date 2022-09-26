@@ -57,11 +57,16 @@
 
                     <div class="spacer-single"></div>
 
-                    <div class="row wow fadeIn">
+                    <div class="row justify-content-center wow fadeIn">
+                        <div class="col-lg-12 justify-content-center ">
+
+
+                        </div>
                         <div class="col-lg-12">
                             <div class="text-center" style="background-size: cover;">
                                 <h2>On auction</h2>
                                 <div class="small-border bg-color-2" style="background-size: cover;"></div>
+
                             </div>
                         </div>
                         @foreach($biding_tifs as $tif)
@@ -116,7 +121,7 @@
         <div class="container">
 
 
-                    <div class="row wow fadeIn">
+                    <div class="row justify-content-center  wow fadeIn">
                         <div class="col-lg-12">
                             <div class="text-center" style="background-size: cover;">
                                 <h2>New Tif's</h2>
@@ -178,7 +183,7 @@
     @if($categories->count()>0)
     <section>
         <div class="container" style="background-size: cover;">
-        <div class="row">
+        <div class="row justify-content-center ">
             <div class="col-lg-12">
                 <div class="text-center" style="background-size: cover;">
                     <h2>Hot Categories</h2>
@@ -212,7 +217,7 @@
     @if($top_owners->count()>0)
     <section id="section-popular" class="pb-5 no-top" style="background-size: cover;">
         <div class="container" style="background-size: cover;">
-            <div class="row" style="background-size: cover;">
+            <div class="row " style="background-size: cover;">
                 <div class="col-lg-12" style="background-size: cover;">
                     <div class="text-center" style="background-size: cover;">
                         <h2>Top Owners</h2>

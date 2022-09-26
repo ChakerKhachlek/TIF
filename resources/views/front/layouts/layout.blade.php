@@ -25,6 +25,7 @@
     <link id="colors" href="{{ asset('front/css/colors/scheme-03.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('front/css/coloring.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('/black/plugins/loading.css') }}">
+        @stack('styles')
     @livewireStyles
 </head>
 

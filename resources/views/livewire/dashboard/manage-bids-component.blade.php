@@ -112,7 +112,7 @@
 
 
 
-                        <td></td>
+                        <td>Edit/Del</td>
                     </tr>
 
                     {{-- $data represents tifs Livewire--}}
@@ -150,7 +150,7 @@
 
                             <td width="100">
                                 {{-- tif edit and destroy methods Livewire--}}
-
+                                ID : {{$row->id}} </br>
                                 <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon" wire:click="edit({{$row->id}})" >
                                     <i class="tim-icons icon-settings"></i>
                                 </button>
