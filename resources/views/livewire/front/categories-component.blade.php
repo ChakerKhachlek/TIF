@@ -96,8 +96,8 @@
             </div>
         </div>
             @else
-            <div class="row justify-content-center text-center">
-                <div class="col-md-12">
+            <div class="row justify-content-center text-center" >
+                <div class="col-md-12" >
                     No results !
                 </div>
                 </div>

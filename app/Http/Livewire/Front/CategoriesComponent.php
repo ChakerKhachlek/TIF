@@ -18,7 +18,7 @@ class CategoriesComponent extends Component
     public $categories;
 
     public function updatingSelectedId(){
-        sleep(4);
+
         $this->resetPage();
     }
 
