@@ -3,7 +3,6 @@
 <section id="section-collections">
     <div class="container">
 
-
                 <div class="row ">
                     <div class="col-lg-12">
                         <div class="text-center" style="background-size: cover;">
@@ -23,6 +22,20 @@
                           </select>
                 </div>
             </div>
+
+
+        <div class="row mt-4 text-center align-items-center">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+            <div wire:loading wire:target="selectedId"  >
+                <div style="color: #f4696b" class="la-square-jelly-box ">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+            <div class="col-md-4"></div>
+         </div>
                 <div class="row ">
                     @if($tifs->count() > 0)
                     @foreach($tifs as $tif)

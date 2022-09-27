@@ -17,6 +17,8 @@ class NewsletterComponent extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $selectedNews;
+
     public function render()
     {
         $data=Newsletter::paginate(10);
@@ -39,5 +41,15 @@ return response()->streamDownload(
     'newsletter.pdf'
     );
 
+    }
+
+    public function deleteNewsMode($id){
+        $this->selectedNews=$id;
+    }
+
+    public function deleteNews(){
+    $record=Newsletter::findOrFail($this->selectedNews);
+    $record->delete();
+    $this->emit('news-deleted','Registred email deleted successfully !');
     }
 }

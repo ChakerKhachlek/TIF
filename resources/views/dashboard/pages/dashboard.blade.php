@@ -54,6 +54,30 @@
                     <h3><span>{{ $newslettersCount }}</span></h3>
                 </div>
             </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="1s">
+                <div class="de_count">
+
+                    <h5 class="id-color">Most Viewed Tif</h5>
+                    <h3><span>{{ $maxViewsTifs->title }} : {{ $maxViewsTifs->views }}</span></h3>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="1s">
+                <div class="de_count">
+
+                    <h5 class="id-color">Most Viewed Category</h5>
+                    <h3><span>{{ $maxViewsCategories->name }} : {{ $maxViewsCategories->views }}</span></h3>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="1s">
+                <div class="de_count">
+
+                    <h5 class="id-color">Most Viewed Style</h5>
+                    <h3><span>{{ $maxViewsStyles->name }} : {{ $maxViewsStyles->views }}</span></h3>
+                </div>
+            </div>
         </div>
         <div class="row my-3 justify-content-center">
         <div class="col-6 text-white">

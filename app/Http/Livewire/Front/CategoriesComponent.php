@@ -18,8 +18,10 @@ class CategoriesComponent extends Component
     public $categories;
 
     public function updatingSelectedId(){
+        sleep(4);
         $this->resetPage();
     }
+
 
     public function mount($selected_id){
         $this->selectedId=$selected_id;

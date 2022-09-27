@@ -118,7 +118,7 @@
                             <div class="de-flex">
                                 <div class="de-flex-col">
                                     <a href="index.html">
-                                        <img alt="" class="f-logo" src="{{ asset('images/logo-2-light.png') }}" /><span class="copy">&copy; Copyright <script>
+                                        <img alt="" class="f-logo" src="{{asset('/logo-header.png')}}" /><span class="copy">&copy; Copyright <script>
                                             document.write(new Date().getFullYear())
                                           </script> - Imagination Factory by Imagineers</span>
                                     </a>

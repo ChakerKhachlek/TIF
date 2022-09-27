@@ -17,6 +17,8 @@ class AdminController extends Controller
     public function dashboard(){
 
 
+
+
         $tifs=Tif::with('owner')->get();
         $categories=Category::all();
         $categoriesTifsCounts=[];
@@ -117,11 +119,17 @@ class AdminController extends Controller
         }
 
 
+        $maxViewsTifs=$tifs->sortBy('views', 0, true)->first();
+        $maxViewsCategories=$categories->sortBy('views', 0, true)->first();
+        $maxViewsStyles=$styles->sortBy('views', 0, true)->first();
+
+
         return view('dashboard.pages.dashboard',
         [
             'tifs'=>$tifs,
             'categories'=>$categories,
             'styles'=>$styles,
+
             'owners'=>$owners,
             'bids'=>$bids,
             'newsletters'=>$newsletters,
@@ -143,7 +151,12 @@ class AdminController extends Controller
 
             'weekBidsCount'=>$weekBidsCount,
             'weekConfirmedBidsCount'=>$weekConfirmedBidsCount,
-            'randomBidColors'=>$randomBidColors
+            'randomBidColors'=>$randomBidColors,
+
+            'maxViewsTifs'=>$maxViewsTifs,
+            'maxViewsCategories'=>$maxViewsCategories,
+            'maxViewsStyles'=>$maxViewsStyles,
+
 
         ]
     );
