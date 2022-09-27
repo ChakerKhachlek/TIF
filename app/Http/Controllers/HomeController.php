@@ -43,9 +43,10 @@ class HomeController extends Controller
             $query;
         }])
             ->withCount('tifs')
+
 			->orderBy('tifs_count', 'desc')
             ->limit(10)
-            ->get();
+            ->get()->where('tifs_count','>','0');
 
 
         return view('welcome',[

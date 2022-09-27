@@ -3,7 +3,7 @@
             <div class="row mt-5 text-center align-items-center">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                <div wire:loading wire:target="search"  >
+                <div wire:loading wire:target="search, filterAll, filterAvailable, filterOnAuction,filterBuyed"  >
                     <div style="color: #f4696b" class="la-square-jelly-box la-2x">
                         <div></div>
                         <div></div>
@@ -20,7 +20,7 @@
                             <div class="items_filter">
                                 <div  class="row form-dark" id="form_quick_search"  name="form_quick_search">
                                     <div class="col text-center">
-                                        <input  wire:model.debounce.500ms="search" class="form-control" id="name_1" name="name_1" placeholder="reference, title, owner, style, category..." type="text" /> <a href="#" id="btn-submit" ><i class="fa fa-search " style="background-color:#F44336"></i></a>
+                                        <input  wire:model.debounce.500ms="search" class="form-control" id="name_1" name="name_1" placeholder="reference, title, owner, style, category..." type="text" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Search by Reference ,Title ,Owner, Style, Category" /> <a href="#" id="btn-submit" ><i class="fa fa-search " style="background-color:#F44336"></i></a>
 
                                         <div class="clearfix"></div>
                                     </div>

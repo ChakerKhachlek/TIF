@@ -50,7 +50,7 @@
                                 <div class="de-flex-col">
                                     <form action="/search" method="POST" >
                                         @csrf
-                                    <input id="quick_search" class="xs-hide style-2" name="search" placeholder="search by ref, title, owner, style, category..." type="text" />
+                                    <input id="quick_search" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Search by Reference ,Title ,Owner, Style, Category" class="xs-hide style-2" name="search" placeholder="Search by ref ,title ,owner, style, category..." type="text" />
                                     </form>
                                 </div>
                             </div>
