@@ -26,6 +26,7 @@
     <link href="{{ asset('front/css/coloring.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('/black/plugins/loading.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    @stack('styles')
     @livewireStyles
 </head>
 

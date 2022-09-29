@@ -55,7 +55,7 @@ class BuyFormComponent extends Component
         }
     );
     $this->emit('buy-passes','We have receive your request !');
-    $this->success = 'We have receive your request !';
+    $this->success = 'We have received your request !';
     $this->resetInput();
 
     }catch(\Exception $e){

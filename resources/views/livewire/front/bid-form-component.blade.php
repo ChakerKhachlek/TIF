@@ -1,3 +1,46 @@
+<div>
+
+    <div>
+        <div wire:poll.3000ms>
+            <button class="btn-main" href="#"  data-bs-toggle="modal" data-bs-target="#scrollableModal">Place a bid <span> ( Current {{ $tif->auction_top_biding_price }} DT )</span></button>
+
+        </div>
+    </div>
+
+    <div class="row mt-5 ">
+        <h3>Bidding history</h3>
+    </div>
+    <div class="row ">
+        <div class="col-md-2">
+            <div class="lds-ripple"><div></div><div></div></div>
+
+        </div>
+
+        <div class="col-md-10">
+        <table class="table responsive text-white table-borderless">
+<thead>
+    <th >Name</th>
+    <th>Bid</th>
+    <th>Placed at</th>
+</thead>
+<tbody>
+    @foreach($confirmedBids as $bid)
+    <tr>
+    <td>{{ $bid->name }}</td>
+    <td>{{ $bid->bid_price }}</td>
+    <td>{{ $bid->created_at->format('H:i:s d M Y') }}</td>
+</tr>
+    @endforeach
+
+</tbody>
+
+        </table>
+
+        </div>
+    </div>
+
+
+
 <div wire:ignore.self class="modal fade" id="scrollableModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scrollableModalLabel" style="background-size: cover; display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" "="" style="background-size: cover;">
       <div class="modal-content" style="background-size: cover;">
@@ -39,30 +82,35 @@
                         </div>
                     @endif
 
-    <row>
+    <div class="row mt-2" >
     <div class="field-set mt-2">
         <input type="text" name="name" id="name" wire:model.lazy="name" class="form-control" placeholder="Your Name" />
     </div>
-    </row>
+    </div>
 
-    <row>
+    <div class="row mt-2" >
     <div class="field-set mt-2">
         <input type="text" name="email" id="email" wire:model.lazy="email" class="form-control" placeholder="Your Email" />
     </div>
-    </row>
+    </div>
 
-    <row>
+    <div class="row mt-2" >
     <div class="field-set mt-2">
         <input type="text" name="phone" id="phone" wire:model.lazy="phone" class="form-control" placeholder="Your Phone" />
     </div>
-    </row>
+    </div>
 
-    <row>
+    <div class="row mt-2" >
     <div class="field-set my-2">
         <input wire:model.lazy="bid_price" type="number" id="bid_price" class="form-control input-sm"  placeholder=" {{ $tif->auction_top_biding_price+1 }}" min="{{ $tif->auction_top_biding_price+1 }}" >
     </div>
-    </row>
-        <h4>Current bid : {{ $tif->auction_top_biding_price }} Dt</p>
+    </div>
+    <div class="row mt-2" >
+<div class="col-md-2"><div class="lds-ripple"><div></div><div></div></div></div>
+<div class="col-md-1"></div>
+<div class="col-md-8 my-auto"> <h4 class="align-middle">Current bid : {{ $tif->auction_top_biding_price }} Dt</p></div>
+    </div>
+
 
 </div>
 </div>
@@ -99,7 +147,59 @@ Livewire.on('time-passed', event => {
 
 </script>
 @endpush
+@push('styles')
+<style>
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ripple div {
+    position: absolute;
+    border: 4px solid #fff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    4.9% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    5% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+    }
+  }
+</style>
+@endpush
+</div>
+</div>
+</div>
 
-</div>
-</div>
+
 </div>

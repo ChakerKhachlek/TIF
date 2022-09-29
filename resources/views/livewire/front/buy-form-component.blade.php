@@ -94,6 +94,9 @@
 
 
 Livewire.on('buy-passes', event => {
+    $("#scrollableModal").modal('hide');
+            $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
     toastr.success(event);
 });
 

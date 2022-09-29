@@ -59,7 +59,7 @@
                     <button class="btn-main" href="#"  disabled>Auction closed treating...</button>
 
                     @else
-                    <button class="btn-main" href="#"  data-bs-toggle="modal" data-bs-target="#scrollableModal">Place a bid <span> ( Current {{ $tif->auction_top_biding_price }} DT )</span></button>
+
 
                         @livewire('front.bid-form-component', ['tif' => $tif])
 
