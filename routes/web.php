@@ -21,6 +21,7 @@ Route::get('/owner/{id}/{slug}', [HomeController::class, 'owner'])->name('owner.
 Route::get('/explore', function () {return view('front.pages.explore'); })->name('explore');
 
 Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 Route::get('/categories/show/{id}/{slug?}', [HomeController::class, 'categories'] )->name('categories.show');
 

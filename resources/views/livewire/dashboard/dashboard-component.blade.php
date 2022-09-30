@@ -5,7 +5,7 @@
         </div>
 
 
-
+        <div wire:poll.3000ms>
     <div class="row justify-content-center " >
         <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="0s">
             <div class="de_count">
@@ -79,6 +79,8 @@
             </div>
         </div>
     </div>
+</div>
+
 
     <div class="row my-3 justify-content-center">
     <div class="col-6 text-white">

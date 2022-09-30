@@ -4,7 +4,7 @@
         <div wire:poll.3000ms>
             <button class="btn-main" href="#"  data-bs-toggle="modal" data-bs-target="#scrollableModal">Place a bid <span> ( Current {{ $tif->auction_top_biding_price }} DT )</span></button>
 
-        </div>
+
     </div>
 
     <div class="row mt-5 ">
@@ -27,7 +27,7 @@
     @foreach($confirmedBids as $bid)
     <tr>
     <td>{{ $bid->name }}</td>
-    <td>{{ $bid->bid_price }}</td>
+    <td>{{ $bid->bid_price }} DT</td>
     <td>{{ $bid->created_at->format('H:i:s d M Y') }}</td>
 </tr>
     @endforeach
@@ -201,5 +201,5 @@ Livewire.on('time-passed', event => {
 </div>
 </div>
 
-
+</div>
 </div>

@@ -15,11 +15,12 @@ class BidFormComponent extends Component
 
 
     public function mount(){
-        $this->confirmedBids=$this->tif->bids()->where('display','=','1')->latest()->limit(3)->get();
 
     }
     public function render()
     {
+        $this->confirmedBids=$this->tif->bids()->where('display','=','1')->latest()->limit(3)->get();
+
         return view('livewire.front.bid-form-component');
     }
 
