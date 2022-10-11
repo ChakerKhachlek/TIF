@@ -14,6 +14,7 @@ class CreateBidsTable extends Migration
     public function up()
     {
         Schema::create('bids', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
@@ -21,7 +22,7 @@ class CreateBidsTable extends Migration
             $table->float('bid_price')->nullable();
             $table->boolean('display')->default(false);
             $table->timestamps();
-            $table->integer('tif_id')->unsigned();
+            $table->unsignedBigInteger('tif_id');
             $table->foreign('tif_id')->references('id')->on('tifs');
         });
     }

@@ -14,6 +14,7 @@ class CreateTifsTable extends Migration
     public function up()
     {
         Schema::create('tifs', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->text('title')->nullable();
             $table->text('reference')->nullable();
@@ -28,9 +29,9 @@ class CreateTifsTable extends Migration
 
             $table->bigInteger('views')->unsigned()->default(0)->index();
 
-            $table->integer('owner_id')->unsigned();
+            $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('owner');
-            $table->integer('style_id')->unsigned();
+            $table->unsignedBigInteger('style_id');
             $table->foreign('style_id')->references('id')->on('style');
             $table->timestamps();
         });

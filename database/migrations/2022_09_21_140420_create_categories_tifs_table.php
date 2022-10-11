@@ -14,6 +14,7 @@ class CreateCategoriesTifsTable extends Migration
     public function up()
     {
         Schema::create('category_tif', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->integer('category_id')->unsigned();
             $table->integer('tif_id')->unsigned();

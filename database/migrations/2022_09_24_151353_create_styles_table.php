@@ -14,6 +14,7 @@ class CreateStylesTable extends Migration
     public function up()
     {
         Schema::create('styles', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('name')->nullable();
             $table->text('style_img_link')->nullable();
