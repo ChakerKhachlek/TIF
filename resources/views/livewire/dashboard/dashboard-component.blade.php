@@ -55,6 +55,8 @@
             </div>
         </div>
 
+        @if( !empty($maxViewsTifs))
+
         <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="1s">
             <div class="de_count">
 
@@ -62,7 +64,9 @@
                 <h3><span>{{ $maxViewsTifs->title }} : {{ $maxViewsTifs->views }}</span></h3>
             </div>
         </div>
+        @endif
 
+        @if( !empty($maxViewsCategories))
         <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="1s">
             <div class="de_count">
 
@@ -71,6 +75,8 @@
             </div>
         </div>
 
+        @endif
+        @if( !empty($maxViewsStyles))
         <div class="col-lg-4 col-md-6 wow fadeInRight mb30" data-wow-delay="1s">
             <div class="de_count">
 
@@ -78,6 +84,7 @@
                 <h3><span>{{ $maxViewsStyles->name }} : {{ $maxViewsStyles->views }}</span></h3>
             </div>
         </div>
+        @endif
     </div>
 </div>
 

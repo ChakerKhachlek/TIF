@@ -1,7 +1,7 @@
 <div>
     <div class="container-fluid justify-content-center text-center text-white">
 
-        @include('livewire.dashboard.Bids.deleteBid')
+        @include('livewire.dashboard.bids.deleteBid')
 
 
         {{-- create and update displaying area Livewire--}}

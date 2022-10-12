@@ -55,7 +55,7 @@
 
     </row>
     <row>
-        <img class="lazy img-fluid" src="{{url('storage/owners_images/'.$tif->owner->owner_img_link) }}" alt="">
+        <img class="lazy img-fluid" src="{{url('storage/tifs_images/'.$tif->tif_img_url) }}" alt="">
     </row>
 
     @if (count($errors) > 0)

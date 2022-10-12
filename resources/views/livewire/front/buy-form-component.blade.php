@@ -13,7 +13,7 @@
 
     </row>
     <row>
-        <img class="lazy img-fluid" src="{{url('storage/owners_images/'.$tif->owner->owner_img_link) }}" alt="">
+        <img class="lazy img-fluid" src="{{url('storage/tifs_images/'.$tif->tif_img_url) }}" alt="">
     </row>
      <row class="text-center ">
         <h5 class="mt-2"> {{  $tif->price }} DT</h5>
