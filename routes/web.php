@@ -55,7 +55,7 @@ Route::get('/manage-tifs', function () {
     Route::get('/newsletter', function () {
         return view('dashboard.pages.newsletter'); })->name('newsletter');
 
-      
+
 
 
 });
