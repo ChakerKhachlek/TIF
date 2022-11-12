@@ -67,6 +67,10 @@
                                  <div class="nft__item_action">
                                     <a href="{{ route('tif.show',[$tif->id, $tif->slug])}}">Owned</a>
                                 </div>
+                                @elseif($tif->status=="On auction")
+                                <div class="nft__item_action">
+                                 <a href="{{ route('tif.show',[$tif->id, $tif->slug])}}">On auction</a>
+                             </div>
                                @else
                                <div class="nft__item_action">
                                 <a href="{{ route('tif.show',[$tif->id, $tif->slug])}}">Buy now</a>

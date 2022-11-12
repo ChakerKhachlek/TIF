@@ -35,7 +35,7 @@ class CategoriesComponent extends Component
     public function render()
     {
         $this->selectedCategory=Category::findOrFail($this->selectedId);
-        $tifs= $this->selectedCategory->tifs()->orderBy('created_at','DESC')->paginate(1);
+        $tifs= $this->selectedCategory->tifs()->orderBy('created_at','DESC')->paginate(12);
         return view('livewire.front.categories-component',["tifs"=>$tifs]);
     }
 }
